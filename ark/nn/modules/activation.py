@@ -1,6 +1,7 @@
+import torch
 from torch.nn import Module
 
-from .functional import mish, swish
+from ..functional import mish, swish
 
 
 class Swish(Module):
@@ -26,7 +27,7 @@ class Swish(Module):
     """
 
     def __init__(self, inplace: bool = False):
-        super().__init__()
+        super(Swish, self).__init__()
         self.inplace = inplace
 
     def forward(self, input):
@@ -57,7 +58,7 @@ class Mish(Module):
     """
 
     def __init__(self, inplace: bool = False):
-        super().__init__()
+        super(Mish, self).__init__()
         self.inplace = inplace
 
     def forward(self, input):
