@@ -25,6 +25,10 @@ def swish(input: Tensor, inplace: bool = False):
 
     See :class:`~ark.nn.Swish` for details.
     """
+    if not torch.jit.is_scripting():
+        x_sigmoid = torch.sigmoid(input)
+        return input.mul_(x_sigmoid) if inplace else input.mul(x_sigmoid)
+
     return SwishFunction.apply(input, inplace)
 
 
@@ -48,4 +52,8 @@ def mish(input: Tensor, inplace: bool = False):
 
     See :class:`~ark.nn.Mish` for details.
     """
+    if not torch.jit.is_scripting():
+        x_ts = torch.tanh_(F.softplus(input))
+        return input.mul_(x_ts) if inplace else input.mul(x_ts)
+
     return MishFunction.apply(input, inplace)
