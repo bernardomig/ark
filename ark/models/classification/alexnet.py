@@ -14,24 +14,21 @@ class AlexNet(nn.Sequential):
     def __init__(self, in_channels: int, num_classes: int):
         features = nn.Sequential(OrderedDict([
             ('layer1', nn.Sequential(OrderedDict([
-                ('conv', nn.Conv2d(in_channels, 64,
-                                   kernel_size=11, stride=4, padding=2)),
-                ('lrn', nn.LocalResponseNorm(64, k=2)),
+                ('conv', nn.Conv2d(in_channels, 64, 11, stride=4, padding=2)),
                 ('relu', nn.ReLU(inplace=True)),
                 ('pool', nn.MaxPool2d(kernel_size=3, stride=2)),
             ]))),
             ('layer2', nn.Sequential(OrderedDict([
-                ('conv', nn.Conv2d(64, 192, kernel_size=5, padding=2)),
-                ('lrn', nn.LocalResponseNorm(192, k=2)),
+                ('conv', nn.Conv2d(64, 192, 5, padding=2)),
                 ('relu', nn.ReLU(inplace=True)),
                 ('pool', nn.MaxPool2d(kernel_size=3, stride=2)),
             ]))),
             ('layer3', nn.Sequential(OrderedDict([
-                ('conv1', nn.Conv2d(192, 384, kernel_size=3, padding=1)),
+                ('conv1', nn.Conv2d(192, 384, 3, padding=1)),
                 ('relu1', nn.ReLU(inplace=True)),
-                ('conv2', nn.Conv2d(384, 256, kernel_size=3, padding=1)),
+                ('conv2', nn.Conv2d(384, 256, 3, padding=1)),
                 ('relu2', nn.ReLU(inplace=True)),
-                ('conv3', nn.Conv2d(256, 256, kernel_size=3, padding=1)),
+                ('conv3', nn.Conv2d(256, 256, 3, padding=1)),
                 ('relu3', nn.ReLU(inplace=True)),
                 ('pool', nn.MaxPool2d(kernel_size=3, stride=2)),
             ]))),

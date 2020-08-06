@@ -57,3 +57,13 @@ def mish(input: Tensor, inplace: bool = False):
         return input.mul_(x_ts) if inplace else input.mul(x_ts)
 
     return MishFunction.apply(input, inplace)
+
+
+@torch.jit.script
+def channel_shuffle(input: Tensor, groups: int):
+    batch_size, channels, height, width = input.shape
+
+    return input \
+        .reshape(batch_size, groups, channels // groups, height, width) \
+        .transpose(1, 2) \
+        .reshape(batch_size, channels, height, width)
