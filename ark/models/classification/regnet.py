@@ -112,7 +112,7 @@ class RegNet(nn.Sequential):
             return nn.Sequential(*layers)
 
         features = nn.Sequential(OrderedDict([
-            ('head', ConvBnReLU2d(in_channels, 32, 3, padding=1, stride=2)),
+            ('stem', ConvBnReLU2d(in_channels, 32, 3, padding=1, stride=2)),
             ('layer1', make_layer(32, block_channels[0], block_depth[0])),
             ('layer2', make_layer(block_channels[0], block_channels[1], block_depth[1])),
             ('layer3', make_layer(block_channels[1], block_channels[2], block_depth[2])),
