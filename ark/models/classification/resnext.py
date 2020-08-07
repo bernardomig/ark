@@ -28,7 +28,7 @@ def resnext101_32x8(in_channels, out_channels):
                    cardinality=32)
 
 
-def resnext151_32x4(in_channels, out_channels):
+def resnext152_32x4(in_channels, out_channels):
     return ResNeXt(in_channels, out_channels,
                    block_depth=[3, 8, 36, 3],
                    base_width=4,
