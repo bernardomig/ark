@@ -1,3 +1,4 @@
+from typing import Tuple
 from collections import OrderedDict
 import torch
 from torch import nn
@@ -11,31 +12,44 @@ __all__ = [
 
 
 def squeezenet(in_channels, num_classes):
+    r"""SqueezeNet
+
+    See :class:`~ark.models.classification.squeezenet.SqueezeNet` for details.
+    """
     return SqueezeNet(in_channels, num_classes)
 
 
 class SqueezeNet(nn.Sequential):
-    def __init__(self, in_channels, num_classes):
+    r"""SqueezeNet implementation from the
+    `"SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size":
+    <https://arxiv.org/abs/1602.07360>` paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+    """
+
+    def __init__(self, in_channels: int, num_classes: int):
         features = nn.Sequential(OrderedDict([
             ('stem', nn.Sequential(
                 ConvReLU2d(in_channels, 64, kernel_size=3, stride=2),
                 nn.MaxPool2d(kernel_size=3, stride=2, ceil_mode=True)
             )),
             ('layer1', nn.Sequential(
-                FireBlock(64, 128, (16, 64, 64)),
-                FireBlock(128, 128, (16, 64, 64)),
+                FireModule(64, 128, (16, 64, 64)),
+                FireModule(128, 128, (16, 64, 64)),
                 nn.MaxPool2d(kernel_size=3, stride=2, ceil_mode=True),
             )),
             ('layer2', nn.Sequential(
-                FireBlock(128, 256, (32, 128, 128)),
-                FireBlock(256, 256, (32, 128, 128)),
+                FireModule(128, 256, (32, 128, 128)),
+                FireModule(256, 256, (32, 128, 128)),
                 nn.MaxPool2d(kernel_size=3, stride=2, ceil_mode=True),
             )),
             ('layer3', nn.Sequential(
-                FireBlock(256, 384, (48, 192, 192)),
-                FireBlock(384, 384, (48, 192, 192)),
-                FireBlock(384, 512, (64, 256, 256)),
-                FireBlock(512, 512, (64, 256, 256)),
+                FireModule(256, 384, (48, 192, 192)),
+                FireModule(384, 384, (48, 192, 192)),
+                FireModule(384, 512, (64, 256, 256)),
+                FireModule(512, 512, (64, 256, 256)),
             )),
         ]))
 
@@ -53,13 +67,23 @@ class SqueezeNet(nn.Sequential):
         ]))
 
 
-class FireBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, layer_channels):
-        super().__init__()
+class FireModule(nn.Module):
+    r"""Fire block of the SqueezeNet model.
+
+    Args:
+        in_channels (int): the input channels
+        out_channels (int): the output channels
+        layer_channels (tuple of int): the channels for the squeeze layer and 
+            the 1x1 and 3x3 expand layer, respectively
+    """
+
+    def __init__(self, in_channels: int, out_channels: int,
+                 layer_channels: Tuple[int, int, int]):
+        super(FireModule, self).__init__()
         squeeze_channels, expand1x1_channels, expand3x3_channels = layer_channels
 
         assert expand1x1_channels + expand3x3_channels == out_channels, \
-                'the output channels must match the sum of the expand channels'
+            'the output channels must match the sum of the expand channels'
 
         self.squeeze = ConvReLU2d(in_channels, squeeze_channels, 1)
         self.expand1x1 = ConvReLU2d(

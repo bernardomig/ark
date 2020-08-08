@@ -8,17 +8,36 @@ from ark.nn import Swish
 from ark.nn.utils import round_by
 from ark.nn.easy import ConvBn2d
 
+__all__ = [
+    'EfficientNet',
+    'efficientnet_b0', 'efficientnet_b1', 'efficientnet_b2',
+    'efficientnet_b3', 'efficientnet_b4', 'efficientnet_b5',
+    'efficientnet_b6', 'efficientnet_b7',
+]
+
 
 def efficientnet_b0(in_channels, out_channels):
+    r"""EfficientNet B0
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels)
 
 
 def efficientnet_b1(in_channels, out_channels):
+    r"""EfficientNet B1
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels,
                         depth_multiplier=1.1)
 
 
 def efficientnet_b2(in_channels, out_channels):
+    r"""EfficientNet B2
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels,
                         width_multiplier=1.1,
                         depth_multiplier=1.2,
@@ -26,6 +45,10 @@ def efficientnet_b2(in_channels, out_channels):
 
 
 def efficientnet_b3(in_channels, out_channels):
+    r"""EfficientNet B3
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels,
                         width_multiplier=1.2,
                         depth_multiplier=1.4,
@@ -33,6 +56,10 @@ def efficientnet_b3(in_channels, out_channels):
 
 
 def efficientnet_b4(in_channels, out_channels):
+    r"""EfficientNet B4
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels,
                         width_multiplier=1.4,
                         depth_multiplier=1.8,
@@ -40,6 +67,10 @@ def efficientnet_b4(in_channels, out_channels):
 
 
 def efficientnet_b5(in_channels, out_channels):
+    r"""EfficientNet B5
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels,
                         width_multiplier=1.6,
                         depth_multiplier=2.2,
@@ -47,6 +78,10 @@ def efficientnet_b5(in_channels, out_channels):
 
 
 def efficientnet_b6(in_channels, out_channels):
+    r"""EfficientNet B6
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels,
                         width_multiplier=1.8,
                         depth_multiplier=2.6,
@@ -54,6 +89,10 @@ def efficientnet_b6(in_channels, out_channels):
 
 
 def efficientnet_b7(in_channels, out_channels):
+    r"""EfficientNet B7
+
+    See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
+    """
     return EfficientNet(in_channels, out_channels,
                         width_multiplier=2.0,
                         depth_multiplier=3.1,
@@ -61,24 +100,40 @@ def efficientnet_b7(in_channels, out_channels):
 
 
 class EfficientNet(nn.Sequential):
-    def __init__(self, in_channels, num_classes,
-                 width_multiplier=1.,
-                 depth_multiplier=1.,
-                 dropout_rate=0.2):
+    r"""EfficientNet implementation from 
+    `"EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks":
+    <https://arxiv.org/abs/1905.11946>`_ paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+        width_multiplier (float): hyperparameter that scales the width 
+            of the network
+        depth_multiplier (float): hyperparameter that scales the depth of each 
+            layer of the network
+        dropout_p (float): probability for the dropout layer the before
+            the last dense layer
+    """
+
+    def __init__(self, in_channels: int, num_classes: int,
+                 width_multiplier: float = 1.,
+                 depth_multiplier: float = 1.,
+                 dropout_p: float = 0.2):
 
         def c(channels): return round_by(width_multiplier * channels)
         def d(depth): return ceil(depth * depth_multiplier)
 
         def make_layer(in_channels, out_channels, num_blocks,
                        kernel_size=3, stride=1, expansion=6):
+            MB = MobileInvertedBottleneck  # for redability
             layers = [
-                MobileInvertedBottleneck(in_channels, out_channels, kernel_size,
-                                         stride=stride, expansion=expansion)
+                MB(in_channels, out_channels, kernel_size,
+                   stride=stride, expansion=expansion)
             ]
             for _ in range(1, num_blocks):
                 layers += [
-                    MobileInvertedBottleneck(out_channels, out_channels, kernel_size,
-                                             expansion=expansion)
+                    MB(out_channels, out_channels, kernel_size,
+                       expansion=expansion)
                 ]
             return nn.Sequential(*layers)
 
@@ -96,7 +151,7 @@ class EfficientNet(nn.Sequential):
 
         classifier = nn.Sequential(
             nn.AdaptiveAvgPool2d(output_size=1),
-            nn.Dropout(dropout_rate),
+            nn.Dropout(dropout_p),
             nn.Flatten(),
             nn.Linear(c(1280), num_classes),
         )
@@ -108,6 +163,8 @@ class EfficientNet(nn.Sequential):
 
 
 class MobileInvertedBottleneck(nn.Module):
+    "MBBlock of EfficientNet"
+
     def __init__(self, in_channels, out_channels, kernel_size,
                  stride=1,
                  expansion=6, reduction=4,

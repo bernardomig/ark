@@ -4,35 +4,77 @@ from torch import nn
 from ark.nn.easy import ConvBn2d
 from ark.nn.utils import round_by
 
+__all__ = [
+    'MobileNetV2',
+    'mobilenetv2_1_0', 'mobilenetv2_0_75', 'mobilenetv2_0_50',
+    'mobilenetv2_0_35', 'mobilenetv2_0_25', 'mobilenetv2_0_10',
+]
+
 
 def mobilenetv2_1_0(in_channels, num_classes):
+    r"""MobileNetV2 with width 1.0
+
+    See :class:`~ark.models.classification.mobilenetv2.MobileNetV2` for details.
+    """
     return MobileNetV2(in_channels, num_classes, width_multiplier=1)
 
 
 def mobilenetv2_0_75(in_channels, num_classes):
+    r"""MobileNetV2 with width 0.75
+
+    See :class:`~ark.models.classification.mobilenetv2.MobileNetV2` for details.
+    """
     return MobileNetV2(in_channels, num_classes, width_multiplier=0.75)
 
 
 def mobilenetv2_0_50(in_channels, num_classes):
+    r"""MobileNetV2 with width 0.50
+
+    See :class:`~ark.models.classification.mobilenetv2.MobileNetV2` for details.
+    """
     return MobileNetV2(in_channels, num_classes, width_multiplier=0.5)
 
 
 def mobilenetv2_0_35(in_channels, num_classes):
+    r"""MobileNetV2 with width 0.35
+
+    See :class:`~ark.models.classification.mobilenetv2.MobileNetV2` for details.
+    """
     return MobileNetV2(in_channels, num_classes, width_multiplier=0.35)
 
 
 def mobilenetv2_0_25(in_channels, num_classes):
+    r"""MobileNetV2 with width 0.25
+
+    See :class:`~ark.models.classification.mobilenetv2.MobileNetV2` for details.
+    """
     return MobileNetV2(in_channels, num_classes, width_multiplier=0.25)
 
 
 def mobilenetv2_0_10(in_channels, num_classes):
+    r"""MobileNetV2 with width 0.10
+
+    See :class:`~ark.models.classification.mobilenetv2.MobileNetV2` for details.
+    """
     return MobileNetV2(in_channels, num_classes, width_multiplier=0.10)
 
 
 class MobileNetV2(nn.Sequential):
+    r"""MobilenetV2 implementation from 
+    `"MobileNetV2: Inverted Residuals and Linear Bottlenecks": 
+    <https://arxiv.org/abs/1801.04381>`_ paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+        width_multiplier (float): the width multiplier hyperparameter. Default: 1
+    """
+
     def __init__(self, in_channels, num_classes, width_multiplier=1.0):
         def c(channels):
-            return round_by(width_multiplier * channels, 8 if width_multiplier > 0.1 else 4)
+            "channel number mapper"
+            return round_by(width_multiplier * channels,
+                            8 if width_multiplier > 0.1 else 4)
 
         def make_layer(in_channels, out_channels, num_blocks=1, expansion=6, stride=1):
             layers = [InvertedResidual(in_channels, out_channels,
@@ -42,6 +84,7 @@ class MobileNetV2(nn.Sequential):
                                             stride=1, expansion=expansion)]
             return nn.Sequential(*layers)
 
+        # the maximum number of channels in the features is 1280
         out_channels = max(1280, c(1280))
 
         features = nn.Sequential(OrderedDict([
@@ -69,7 +112,18 @@ class MobileNetV2(nn.Sequential):
 
 
 class InvertedResidual(nn.Module):
-    def __init__(self, in_channels, out_channels, stride=1, expansion=6):
+    r"""Inverted Residual block of MobilenetV2.
+
+    Args:
+        in_channels (int): the input channels
+        out_channels (int): the output channels
+        stride (int): the stride of the block
+        expansion (int): the expansion rate of the mid channels
+    """
+
+    def __init__(self, in_channels: int, out_channels: int,
+                 stride: int = 1,
+                 expansion: int = 6):
         super(InvertedResidual, self).__init__()
 
         hidden_channels = in_channels * expansion
@@ -92,6 +146,15 @@ class InvertedResidual(nn.Module):
 
 
 class ConvBnReLU62d(nn.Sequential):
+    r"""The conv+bn+relu6 of present on the mobilenetv2 architecture.
+
+    As usual, the convolution operation includes the bias term and
+    the relu operation is performed inplace.
+
+    The arguments are the same as in the convolution operation.
+    See :class:`torch.nn.Conv2d`.
+    """
+
     def __init__(self, in_channels, out_channels, kernel_size,
                  padding=0, stride=1, groups=1):
         super().__init__(OrderedDict([

@@ -4,6 +4,16 @@ from torch import nn
 
 
 class ConvBnReLU2d(nn.Sequential):
+    r"""The standard conv+bn+relu started in the VGG models
+    and used in almost all modern network architectures.
+
+    As usual, the convolution operation includes the bias term and
+    the relu operation is performed inplace.
+
+    The arguments are the same as in the convolution operation.
+    See :class:`torch.nn.Conv2d`.
+    """
+
     def __init__(self, in_channels, out_channels, kernel_size,
                  padding=0,
                  stride=1,
@@ -22,7 +32,7 @@ class ConvBnReLU2d(nn.Sequential):
 
 
 class ConvReLU2d(nn.Sequential):
-    r"""The standard Conv2d+ReLU started in the VGG models
+    r"""The standard conv+relu started in the VGG models
     and used in almost all modern network architectures.
 
     As usual, the convolution operation includes the bias term and
@@ -48,7 +58,7 @@ class ConvReLU2d(nn.Sequential):
 
 
 class ConvBn2d(nn.Sequential):
-    r"""The standard Conv2d+BatchNorm2d.
+    r"""The standard conv+bn.
 
     As usual, the convolution operation does not include the bias term.
 

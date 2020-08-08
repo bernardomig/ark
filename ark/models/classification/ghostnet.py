@@ -1,3 +1,4 @@
+from typing import Tuple
 from collections import OrderedDict
 import torch
 from torch import nn
@@ -7,14 +8,33 @@ from math import ceil
 from ark.nn.easy import ConvBnReLU2d, ConvBn2d
 from ark.nn.utils import round_by
 
+__all__ = ['GhostNet', 'ghostnet_1_0']
+
 
 def ghostnet_1_0(in_channels, num_classes):
+    r"""GhostNet with width 1.0
+
+    See :class:`~ark.models.classification.ghostnet.GhostNet` for details.
+    """
     return GhostNet(in_channels, num_classes)
 
+
 class GhostNet(nn.Sequential):
+    r"""Ghostnet implementation from 
+    `"GhostNet: More Features from Cheap Operations": 
+    <https://arxiv.org/abs/1911.11907>`_ paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+        width_multiplier (float): the width multiplier hyperparameter. Default: 1
+    """
+
     def __init__(self, in_channels, num_classes, width_multiplier=1.):
 
-        def c(channels): return round_by(width_multiplier * channels)
+        def c(channels):
+            return round_by(width_multiplier * channels,
+                            divisor=8 if width_multiplier >= 0.1 else 4)
 
         features = nn.Sequential(OrderedDict([
             ('head', ConvBnReLU2d(3, c(16), 3, padding=1, stride=2)),
@@ -39,9 +59,9 @@ class GhostNet(nn.Sequential):
                 GhostBottleneck(c(112), c(160), c(672), kernel_size=5, stride=2, use_se=True),
             )),
             ('layer5', nn.Sequential(
-                GhostBottleneck(c(160), c(160), c(960), kernel_size=5, ),
+                GhostBottleneck(c(160), c(160), c(960), kernel_size=5),
                 GhostBottleneck(c(160), c(160), c(960), kernel_size=5, use_se=True),
-                GhostBottleneck(c(160), c(160), c(960), kernel_size=5, ),
+                GhostBottleneck(c(160), c(160), c(960), kernel_size=5),
                 GhostBottleneck(c(160), c(160), c(960), kernel_size=5, use_se=True),
                 ConvBnReLU2d(c(160), c(960), 1),
             )),
@@ -63,10 +83,20 @@ class GhostNet(nn.Sequential):
 
 
 class GhostBottleneck(nn.Module):
+    r"""The residual block of the GhostNet.
+
+    Args:
+        in_channels (int): the input channels
+        out_channels (int): the output channels
+        expansion_channels (int): the number of channels in the mid conv
+        kernel_size (int): kernel size of the mid conv
+        stride (int): the stride of the block
+        use_se (bool): include the Squeeze-Expansion block after the 2nd conv
+    """
+
     def __init__(self, in_channels, out_channels, expansion_channels,
                  kernel_size=3,
                  stride=1,
-                 expansion_ratio=4,
                  use_se=False):
         super(GhostBottleneck, self).__init__()
 
@@ -104,15 +134,26 @@ class GhostBottleneck(nn.Module):
 
 
 class GhostModule(nn.Module):
-    def __init__(self, in_channels, out_channels,
-                 kernel_sizes=(1, 3),
-                 stride=1,
-                 reduction_ratio=2,
-                 use_relu=True):
+    r"""GhostModule replaces the 1x1 convs in the bottleneck.
+
+    Args:
+        in_channels (int): the input channels
+        out_channels (int): the output channels
+        kernel_sizes (tuple of int): the kernel sizes for both convs
+        reduction (int): hyperparameter that sets the number of channels in
+            both mappings.
+        use_relu (bool): include a relu in both convs
+    """
+
+    def __init__(self, in_channels: int, out_channels: int,
+                 kernel_sizes: Tuple[int, int] = (1, 3),
+                 stride: int = 1,
+                 reduction: int = 2,
+                 use_relu: bool = True):
         super(GhostModule, self).__init__()
 
-        init_channels = ceil(out_channels / reduction_ratio)
-        new_channels = init_channels * (reduction_ratio - 1)
+        init_channels = ceil(out_channels / reduction)
+        new_channels = init_channels * (reduction - 1)
 
         ConvBlock = ConvBnReLU2d if use_relu else ConvBn2d
 
@@ -147,10 +188,3 @@ class SEBlock(nn.Module):
         x = self.activation(x)
         x = self.conv2(x)
         return input * F.hardsigmoid(x)
-
-
-if __name__ == "__main__":
-    model = GhostNet(3, 1000)
-    x = torch.randn((3, 3, 224, 224))
-    with torch.no_grad():
-        y = model(x)

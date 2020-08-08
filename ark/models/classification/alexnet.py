@@ -5,11 +5,23 @@ from torch import nn
 __all__ = ['AlexNet', 'alexnet']
 
 
-def alexnet(in_channels=3, num_classes=1000):
+def alexnet(in_channels, num_classes):
+    r"""Alexnet model.
+
+    See :class:`~ark.models.classification.alexnet.AlexNet` for details.
+    """
     return AlexNet(in_channels=in_channels, num_classes=num_classes)
 
 
 class AlexNet(nn.Sequential):
+    r"""AlexNet model implementation from 
+    `"ImageNet Classification with Deep Convolutional Neural Networks"
+    <https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks>`_ paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+    """
 
     def __init__(self, in_channels: int, num_classes: int):
         features = nn.Sequential(OrderedDict([

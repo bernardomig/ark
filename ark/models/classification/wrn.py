@@ -1,48 +1,79 @@
+from typing import Tuple
 from functools import partial
 from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvBnReLU2d, ConvBn2d
-from ark.nn.utils import round_by
 
 from .resnet import ResNet
 
+
 def wrn50_2_0(in_channels, out_channels):
-    return WRN(in_channels, out_channels, 
-                block_depth=[3, 4, 6, 3],
-                width_multiplier=2.)
+    return WRN(in_channels, out_channels,
+               block_depth=[3, 4, 6, 3],
+               width_multiplier=2.)
+
 
 def wrn101_2_0(in_channels, out_channels):
-    return WRN(in_channels, out_channels, 
-                block_depth=[3, 4, 23, 3],
-                width_multiplier=2.)
+    return WRN(in_channels, out_channels,
+               block_depth=[3, 4, 23, 3],
+               width_multiplier=2.)
 
 
 class WRN(ResNet):
-    def __init__(self, in_channels, num_classes, block_depth, expansion=4, width_multiplier=1.):
-        super().__init__(in_channels, num_classes, block_depth, 
-                        block=partial(Bottleneck, expansion=expansion, width_multiplier=width_multiplier), 
-                        expansion=expansion)
+    r"""Wide ResNets implementation from the 
+    `"Wide Residual Networks": <https://arxiv.org/abs/1605.07146>` paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+        block_depth (tuple of int): number of blocks per layer
+        expansion (int): expansion hyperparameter for the residual block
+        width_multiplier (int): width scaling hyperparameter
+    """
+
+    def __init__(self, in_channels: int, num_classes: int,
+                 block_depth: Tuple[int, int, int, int],
+                 expansion: int = 4,
+                 width_multiplier: float = 1.):
+        super().__init__(
+            in_channels, num_classes, block_depth,
+            block=partial(Bottleneck, expansion=expansion, width_multiplier=width_multiplier),
+            block_depth=block_depth,
+            init_channels=64,
+            block_channels=[256, 512, 1024, 2048])
 
 
 class Bottleneck(nn.Module):
-    def __init__(self, in_channels, out_channels, stride=1, expansion=4, width_multiplier=1):
+    r"""WideResNet residual bottleneck.
+
+    Args:
+        stride (int): the stride of the block
+        expansion (int): determines the expansion ratio for the bottleneck
+        width_multiplier (float): hyperparameter that scales the number of 
+            channels in the 2nd conv
+    """
+
+    def __init__(self, in_channels: int, out_channels: int,
+                 stride: float = 1,
+                 expansion: int = 4,
+                 width_multiplier: float = 1):
         super(Bottleneck, self).__init__()
 
-        width = round_by(out_channels * width_multiplier / expansion)
+        width = round((out_channels / expansion) * width_multiplier)
 
         self.conv1 = ConvBnReLU2d(in_channels, width, 1)
         self.conv2 = ConvBnReLU2d(width, width, 3, padding=1, stride=stride)
         self.conv3 = ConvBn2d(width, out_channels, 1)
 
         self.downsample = (
-            ConvBn2d(in_channels, out_channels, 1, stride=stride) 
-            if in_channels != out_channels or stride != 1 
+            ConvBn2d(in_channels, out_channels, 1, stride=stride)
+            if in_channels != out_channels or stride != 1
             else nn.Identity()
         )
 
         self.activation = nn.ReLU(inplace=True)
-    
+
     def forward(self, input):
         x = self.conv1(input)
         x = self.conv2(x)

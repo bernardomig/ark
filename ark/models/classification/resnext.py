@@ -1,3 +1,4 @@
+from typing import Tuple
 from functools import partial
 import torch
 from torch import nn
@@ -5,6 +6,12 @@ from torch import nn
 from ark.nn.easy import ConvBn2d, ConvBnReLU2d
 
 from .resnet import ResNet
+
+__all__ = [
+    'ResNext',
+    'resnext50_32x4', 'resnext101_32x4',
+    'resnext101_32x8', 'resnext152_32x4'
+]
 
 
 def resnext50_32x4(in_channels, out_channels):
@@ -36,11 +43,23 @@ def resnext152_32x4(in_channels, out_channels):
 
 
 class ResNeXt(ResNet):
-    def __init__(self, in_channels, out_channels, block_depth, expansion=4, base_width=64, cardinality=1):
-        super(ResNeXt, self).__init__(in_channels, out_channels, block_depth,
-                                      block=partial(Bottleneck, expansion=expansion,
-                                                    base_width=base_width, cardinality=cardinality),
-                                      expansion=expansion)
+    r"""
+    """
+
+    def __init__(self, in_channels: int, out_channels: int,
+                 block_depth: nn.Module,
+                 init_channels: int = 64,
+                 block_channels: Tuple[int, int, int, int] = [256, 512, 1024, 2048],
+                 expansion: int = 4,
+                 base_width: int = 64,
+                 cardinality: int = 1):
+        super(ResNeXt, self).__init__(
+            in_channels, out_channels,
+            block=partial(Bottleneck, expansion=expansion, base_width=base_width, cardinality=cardinality),
+            block_depth=block_depth,
+            init_channels=64,
+            block_channels=[256, 512, 1024, 2048],
+        )
 
 
 class Bottleneck(nn.Module):
