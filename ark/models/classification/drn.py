@@ -100,8 +100,8 @@ class DRN(nn.Sequential):
                 ConvBnReLU2d(16, 32, 3, padding=1, stride=2),
             )
 
-        features['layer1'] = make_layer(32, 64 * expansion, block_depth[0], stride=2)
-        features['layer2'] = make_layer(64 * expansion, 128 * expansion, block_depth[1], stride=2)
+        features['layer1'] = make_layer(32, 64 * expansion, block_depth[0], block, stride=2)
+        features['layer2'] = make_layer(64 * expansion, 128 * expansion, block_depth[1], block, stride=2)
         features['layer3'] = make_layer(128 * expansion, 256 * expansion, block_depth[2], partial(block, dilation=2))
         features['layer4'] = make_layer(256 * expansion, 512 * expansion, block_depth[3], partial(block, dilation=4))
 
