@@ -29,8 +29,7 @@ def drn_a_50(in_channels=3, num_classes=1000):
     r"""DRN Variant A with 50 layers.
 
     See :class:`~ark.models.classification.drn.DRN` for details."""
-    return DRN(in_channels, num_classes, 'A',
-               block=partial(Bottleneck, expansion=4),
+    return DRN(in_channels, num_classes, 'A', Bottleneck,
                block_depth=[3, 4, 6, 3],
                init_channels=64,
                block_channels=[256, 512, 1024, 2048])
@@ -62,11 +61,10 @@ def drn_c_58(in_channels=3, num_classes=1000):
     r"""DRN Variant C with 58 layers.
 
     See :class:`~ark.models.classification.drn.DRN` for details."""
-    return DRN(in_channels, num_classes, 'C',
-               block=partial(Bottleneck, expansion=4),
+    return DRN(in_channels, num_classes, 'C', Bottleneck,
                block_depth=[3, 4, 6, 3, 1, 1],
                init_channels=32,
-               block_channels=[256, 512, 1024, 512],
+               block_channels=[256, 512, 1024, 2048],
                last_channels=512)
 
 
@@ -118,8 +116,7 @@ def drn_d_54(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 54 layers.
 
     See :class:`~ark.models.classification.drn.DRN` for details."""
-    return DRN(in_channels, num_classes, 'D',
-               block=partial(Bottleneck, expansion=4),
+    return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 6, 3, 1, 1],
                init_channels=32,
                block_channels=[256, 512, 1024, 2048],
@@ -130,8 +127,7 @@ def drn_d_56(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 56 layers.
 
     See :class:`~ark.models.classification.drn.DRN` for details."""
-    return DRN(in_channels, num_classes, 'D',
-               block=partial(Bottleneck, expansion=4),
+    return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 6, 3, 2, 2],
                init_channels=32,
                block_channels=[256, 512, 1024, 2048],
@@ -142,8 +138,7 @@ def drn_d_105(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 105 layers.
 
     See :class:`~ark.models.classification.drn.DRN` for details."""
-    return DRN(in_channels, num_classes, 'D',
-               block=partial(Bottleneck, expansion=4),
+    return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 23, 3, 1, 1],
                init_channels=32,
                block_channels=[256, 512, 1024, 2048],
@@ -154,8 +149,7 @@ def drn_d_107(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 107 layers.
 
     See :class:`~ark.models.classification.drn.DRN` for details."""
-    return DRN(in_channels, num_classes, 'D',
-               block=partial(Bottleneck, expansion=4),
+    return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 23, 3, 2, 2],
                init_channels=32,
                block_channels=[256, 512, 1024, 2048],
@@ -175,7 +169,7 @@ class DRN(nn.Sequential):
 
     As an ablation study, this work proposes 4 variants of the DRN:
 
-    - Variant 'A': an unmodified resnet;
+    - Variant 'A': the vanilla dilated resnet;
     - Variant 'B': add two layers of residual blocks to the end of the resnet, 
         and modify the stem, substituting the max-pooling with
         two basic residual blocks;
