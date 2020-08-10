@@ -3,7 +3,7 @@ from torch import Tensor
 from torch.nn import functional as F
 from torch.autograd import Function
 
-__all__ = ['swish', 'mish']
+__all__ = ['swish', 'mish', 'channel_shuffle']
 
 
 class SwishFunction(Function):
