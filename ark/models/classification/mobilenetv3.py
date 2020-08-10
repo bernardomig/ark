@@ -5,7 +5,7 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvBnAct2d, ConvBn2d
-from ark.nn.utils import round_by
+from ark.nn.utils import round_channels
 
 
 def mobilenetv3_small_1_0(in_channels, num_classes):
@@ -61,7 +61,7 @@ class MobileNetV3(nn.Sequential):
 
 class MobileNetV3Small(MobileNetV3):
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.):
-        def c(channels): return round_by(channels * width_multiplier)
+        def c(channels): return round_channels(channels * width_multiplier)
 
         IR = InvertedResidual  # for redability
         stages = [
@@ -95,7 +95,7 @@ class MobileNetV3Small(MobileNetV3):
 
 class MobileNetV3Large(MobileNetV3):
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.):
-        def c(channels): return round_by(channels * width_multiplier)
+        def c(channels): return round_channels(channels * width_multiplier)
 
         IR = InvertedResidual  # for redability
         stages = [

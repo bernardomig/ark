@@ -5,7 +5,7 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn import Swish
-from ark.nn.utils import round_by
+from ark.nn.utils import round_channels
 from ark.nn.easy import ConvBn2d, ConvBnSwish2d
 
 __all__ = [
@@ -120,7 +120,7 @@ class EfficientNet(nn.Sequential):
                  depth_multiplier: float = 1.,
                  dropout_p: float = 0.2):
 
-        def c(channels): return round_by(width_multiplier * channels)
+        def c(channels): return round_channels(width_multiplier * channels)
         def d(depth): return ceil(depth * depth_multiplier)
 
         def make_layer(in_channels, out_channels, num_blocks,

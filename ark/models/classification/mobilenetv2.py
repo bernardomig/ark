@@ -2,7 +2,7 @@ from collections import OrderedDict
 from torch import nn
 
 from ark.nn.easy import ConvBn2d
-from ark.nn.utils import round_by
+from ark.nn.utils import round_channels
 
 __all__ = [
     'MobileNetV2',
@@ -73,8 +73,8 @@ class MobileNetV2(nn.Sequential):
     def __init__(self, in_channels, num_classes, width_multiplier=1.0):
         def c(channels):
             "channel number mapper"
-            return round_by(width_multiplier * channels,
-                            8 if width_multiplier > 0.1 else 4)
+            return round_channels(width_multiplier * channels,
+                                  8 if width_multiplier > 0.1 else 4)
 
         def make_layer(in_channels, out_channels, num_blocks=1, expansion=6, stride=1):
             layers = [InvertedResidual(in_channels, out_channels,

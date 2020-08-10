@@ -6,7 +6,7 @@ from torch.nn import functional as F
 
 from ark.nn import Swish
 from ark.nn.easy import ConvBn2d, ConvBnReLU2d, ConvBnSwish2d
-from ark.nn.utils import round_by
+from ark.nn.utils import round_channels
 
 
 def mixnet_s(in_channels, num_classes):
@@ -80,7 +80,7 @@ class MixNetS(MixNet):
     """
 
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.):
-        def c(channels): return round_by(channels * width_multiplier)
+        def c(channels): return round_channels(channels * width_multiplier)
 
         IR = InvertedResidual  # for redability
         stages = [
@@ -121,7 +121,7 @@ class MixNetM(MixNet):
     """
 
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.0):
-        def c(channels): return round_by(channels * width_multiplier)
+        def c(channels): return round_channels(channels * width_multiplier)
 
         IR = InvertedResidual  # for redability
         stages = [

@@ -6,7 +6,7 @@ from torch.nn import functional as F
 from math import ceil
 
 from ark.nn.easy import ConvBnReLU2d, ConvBn2d
-from ark.nn.utils import round_by
+from ark.nn.utils import round_channels
 
 __all__ = ['GhostNet', 'ghostnet_1_0']
 
@@ -33,8 +33,8 @@ class GhostNet(nn.Sequential):
     def __init__(self, in_channels, num_classes, width_multiplier=1.):
 
         def c(channels):
-            return round_by(width_multiplier * channels,
-                            divisor=8 if width_multiplier >= 0.1 else 4)
+            return round_channels(width_multiplier * channels,
+                                  divisor=8 if width_multiplier >= 0.1 else 4)
 
         features = nn.Sequential(OrderedDict([
             ('head', ConvBnReLU2d(3, c(16), 3, padding=1, stride=2)),
