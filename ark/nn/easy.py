@@ -2,6 +2,8 @@ from collections import OrderedDict
 import torch
 from torch import nn
 
+from ark.nn import Swish
+
 
 class ConvBnReLU2d(nn.Sequential):
     r"""The standard conv+bn+relu started in the VGG models
@@ -28,6 +30,20 @@ class ConvBnReLU2d(nn.Sequential):
                                bias=False)),
             ('bn', nn.BatchNorm2d(out_channels)),
             ('relu', nn.ReLU(inplace=True)),
+        ]))
+
+
+class ConvBnSwish2d(nn.Sequential):
+    def __init__(self, in_channels, out_channels, kernel_size,
+                 padding=0,
+                 stride=1,
+                 groups=1):
+        super(ConvBnSwish2d, self).__init__(OrderedDict([
+            ('conv', nn.Conv2d(in_channels, out_channels, kernel_size,
+                               padding=padding, stride=stride,
+                               groups=groups, bias=False)),
+            ('bn', nn.BatchNorm2d(out_channels)),
+            ('swish', Swish(inplace=True))
         ]))
 
 
@@ -80,3 +96,4 @@ class ConvBn2d(nn.Sequential):
                                bias=False)),
             ('bn', nn.BatchNorm2d(out_channels)),
         ]))
+

@@ -6,7 +6,7 @@ from torch.nn import functional as F
 
 from ark.nn import Swish
 from ark.nn.utils import round_by
-from ark.nn.easy import ConvBn2d
+from ark.nn.easy import ConvBn2d, ConvBnSwish2d
 
 __all__ = [
     'EfficientNet',
@@ -218,17 +218,3 @@ class SqueezeExcitation(nn.Module):
         x = self.act(x)
         x = self.conv2(x)
         return input * torch.sigmoid_(x)
-
-
-class ConvBnSwish2d(nn.Sequential):
-    def __init__(self, in_channels, out_channels, kernel_size,
-                 padding=0,
-                 stride=1,
-                 groups=1):
-        super(ConvBnSwish2d, self).__init__(OrderedDict([
-            ('conv', nn.Conv2d(in_channels, out_channels, kernel_size,
-                               padding=padding, stride=stride,
-                               groups=groups, bias=False)),
-            ('bn', nn.BatchNorm2d(out_channels)),
-            ('swish', Swish(inplace=True))
-        ]))
