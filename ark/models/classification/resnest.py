@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import Tuple
 from functools import partial
 import torch
 from torch import nn
@@ -7,42 +7,57 @@ from ark.nn.easy import ConvBnReLU2d, ConvBn2d
 from .resnet import ResNet
 
 
+__all__ = ['ResNest', 'resnest50', 'resnest101', 'resnest200', 'resnest269']
+
+
 def resnest50(in_channels, num_classes):
+    r"""ResNest50
+
+    See :class:`~ark.models.classification.resnest.ResNest` for details.
+    """
     return ResNest(in_channels, num_classes,
                    block_depth=[3, 4, 6, 3],
                    init_channels=64,
                    block_channels=[256, 512, 1024, 2048],
-                   expansion=4,
                    radix=2,
                    )
 
 
 def resnest101(in_channels, num_classes):
+    r"""ResNest101
+
+    See :class:`~ark.models.classification.resnest.ResNest` for details.
+    """
     return ResNest(in_channels, num_classes,
                    block_depth=[3, 4, 23, 3],
                    init_channels=128,
                    block_channels=[256, 512, 1024, 2048],
-                   expansion=4,
                    radix=2,
                    )
 
 
 def resnest200(in_channels, num_classes):
+    r"""ResNest200
+
+    See :class:`~ark.models.classification.resnest.ResNest` for details.
+    """
     return ResNest(in_channels, num_classes,
                    block_depth=[3, 24, 36, 3],
                    init_channels=128,
                    block_channels=[256, 512, 1024, 2048],
-                   expansion=4,
                    radix=2,
                    )
 
 
 def resnest269(in_channels, num_classes):
+    r"""ResNest269
+
+    See :class:`~ark.models.classification.resnest.ResNest` for details.
+    """
     return ResNest(in_channels, num_classes,
                    block_depth=[3, 30, 48, 8],
                    init_channels=128,
                    block_channels=[256, 512, 1024, 2048],
-                   expansion=4,
                    radix=2,
                    )
 
@@ -57,6 +72,8 @@ class ResNest(ResNet):
                  cardinality: int = 1,
                  radix: int = 1):
 
+        assert radix != 1, "ResNest does not support radix = 1"
+
         block = partial(Bottleneck,
                         expansion=expansion,
                         base_width=base_width,
@@ -70,7 +87,7 @@ class ResNest(ResNet):
             init_channels=init_channels,
             block_channels=block_channels)
 
-        # only change the stem to match the ResNest architecture
+        # change the stem to match the ResNest architecture
         self.features.stem = nn.Sequential(
             ConvBnReLU2d(in_channels, init_channels // 2, 3, padding=1, stride=2),
             ConvBnReLU2d(init_channels // 2, init_channels // 2, 3, padding=1),
@@ -95,9 +112,7 @@ class Bottleneck(nn.Module):
         self.conv1 = ConvBnReLU2d(in_channels, width, 1)
 
         self.conv2 = ConvBnReLU2d(width, width * radix, 3, padding=1, groups=cardinality * radix)
-        self.sa = SplitAttention(width, width * radix,
-                                 4,
-                                 cardinality=cardinality)
+        self.sa = SplitAttention(width, width * radix, 4, cardinality=cardinality, radix=radix)
         self.pool = nn.AvgPool2d(kernel_size=3, stride=stride, padding=1) if stride == 2 else nn.Identity()
         self.conv3 = ConvBn2d(width, out_channels, 1)
 
@@ -115,8 +130,7 @@ class Bottleneck(nn.Module):
     def forward(self, input):
         x = self.conv1(input)
         x = self.conv2(x)
-        xs = torch.chunk(x, self.radix, dim=1)
-        x = self.sa(xs)
+        x = self.sa(x)
         x = self.pool(x)
         x = self.conv3(x)
         residual = self.downsample(input)
@@ -124,10 +138,14 @@ class Bottleneck(nn.Module):
 
 
 class SplitAttention(nn.Module):
-    def __init__(self, in_channels, out_channels, reduction, cardinality):
+    cardinality: int
+    radix: int
+
+    def __init__(self, in_channels, out_channels, reduction, cardinality, radix):
         super(SplitAttention, self).__init__()
 
         self.cardinality = cardinality
+        self.radix = radix
 
         mid_channels = out_channels // reduction
 
@@ -136,8 +154,8 @@ class SplitAttention(nn.Module):
         self.relu = nn.ReLU(inplace=True)
         self.conv2 = nn.Conv2d(mid_channels, out_channels, 1, groups=cardinality)
 
-    def forward(self, input: List[torch.Tensor]) -> torch.Tensor:
-        radix = len(input)
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
+        xs = torch.chunk(input, self.radix, dim=1)
         x = sum(input)
         at = F.adaptive_avg_pool2d(x, 1)
         at = self.conv1(at)

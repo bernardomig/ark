@@ -9,7 +9,8 @@ from ark.nn.easy import ConvBnReLU2d, ConvBn2d
 def drn_a_18(in_channels=3, num_classes=1000):
     r"""DRN Variant A with 18 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'A', BasicBlock,
                block_depth=[2, 2, 2, 2],
                init_channels=64,
@@ -19,7 +20,8 @@ def drn_a_18(in_channels=3, num_classes=1000):
 def drn_a_34(in_channels=3, num_classes=1000):
     r"""DRN Variant A with 34 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'A', BasicBlock,
                block_depth=[3, 4, 6, 3],
                init_channels=[64, 128, 256, 512])
@@ -28,7 +30,8 @@ def drn_a_34(in_channels=3, num_classes=1000):
 def drn_a_50(in_channels=3, num_classes=1000):
     r"""DRN Variant A with 50 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'A', Bottleneck,
                block_depth=[3, 4, 6, 3],
                init_channels=64,
@@ -38,7 +41,8 @@ def drn_a_50(in_channels=3, num_classes=1000):
 def drn_c_26(in_channels=3, num_classes=1000):
     r"""DRN Variant C with 26 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'C', BasicBlock,
                block_depth=[2, 2, 2, 2, 1, 1],
                init_channels=32,
@@ -49,7 +53,8 @@ def drn_c_26(in_channels=3, num_classes=1000):
 def drn_c_42(in_channels=3, num_classes=1000):
     r"""DRN Variant C with 42 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'C', BasicBlock,
                block_depth=[3, 4, 6, 3, 1, 1],
                init_channels=32,
@@ -60,7 +65,8 @@ def drn_c_42(in_channels=3, num_classes=1000):
 def drn_c_58(in_channels=3, num_classes=1000):
     r"""DRN Variant C with 58 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'C', Bottleneck,
                block_depth=[3, 4, 6, 3, 1, 1],
                init_channels=32,
@@ -71,7 +77,8 @@ def drn_c_58(in_channels=3, num_classes=1000):
 def drn_d_22(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 22 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', BasicBlock,
                block_depth=[2, 2, 2, 2, 1, 1],
                init_channels=32,
@@ -82,7 +89,8 @@ def drn_d_22(in_channels=3, num_classes=1000):
 def drn_d_24(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 24 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', BasicBlock,
                block_depth=[2, 2, 2, 2, 2, 2],
                init_channels=32,
@@ -93,7 +101,8 @@ def drn_d_24(in_channels=3, num_classes=1000):
 def drn_d_38(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 38 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', BasicBlock,
                block_depth=[3, 4, 6, 3, 1, 1],
                init_channels=32,
@@ -104,7 +113,8 @@ def drn_d_38(in_channels=3, num_classes=1000):
 def drn_d_40(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 40 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', BasicBlock,
                block_depth=[3, 4, 6, 3, 2, 2],
                init_channels=32,
@@ -115,7 +125,8 @@ def drn_d_40(in_channels=3, num_classes=1000):
 def drn_d_54(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 54 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 6, 3, 1, 1],
                init_channels=32,
@@ -126,7 +137,8 @@ def drn_d_54(in_channels=3, num_classes=1000):
 def drn_d_56(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 56 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 6, 3, 2, 2],
                init_channels=32,
@@ -137,7 +149,8 @@ def drn_d_56(in_channels=3, num_classes=1000):
 def drn_d_105(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 105 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 23, 3, 1, 1],
                init_channels=32,
@@ -148,7 +161,8 @@ def drn_d_105(in_channels=3, num_classes=1000):
 def drn_d_107(in_channels=3, num_classes=1000):
     r"""DRN Variant D with 107 layers.
 
-    See :class:`~ark.models.classification.drn.DRN` for details."""
+    See :class:`~ark.models.classification.drn.DRN` for details.
+    """
     return DRN(in_channels, num_classes, 'D', Bottleneck,
                block_depth=[3, 4, 23, 3, 2, 2],
                init_channels=32,

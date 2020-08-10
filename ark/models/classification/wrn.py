@@ -9,12 +9,20 @@ from .resnet import ResNet
 
 
 def wrn50_2_0(in_channels, out_channels):
+    r"""Wide ResNet50 with width multiplier 2.0
+
+    See :class:`~ark.models.classification.wrn.WRN` for details.
+    """
     return WRN(in_channels, out_channels,
                block_depth=[3, 4, 6, 3],
                width_multiplier=2.)
 
 
 def wrn101_2_0(in_channels, out_channels):
+    r"""Wide ResNet50 with width multiplier 2.0
+
+    See :class:`~ark.models.classification.wrn.WRN` for details.
+    """
     return WRN(in_channels, out_channels,
                block_depth=[3, 4, 23, 3],
                width_multiplier=2.)

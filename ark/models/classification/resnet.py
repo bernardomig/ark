@@ -13,7 +13,7 @@ __all__ = [
 
 
 def resnet18(in_channels, num_classes):
-    r"""resnet18 model
+    r"""ResNet18 model
 
     See :class:`~ark.models.classification.resnet.ResNet` for details.
     """
@@ -25,7 +25,7 @@ def resnet18(in_channels, num_classes):
 
 
 def resnet34(in_channels, num_classes):
-    r"""resnet34 model
+    r"""ResNet34 model
 
     See :class:`~ark.models.classification.resnet.ResNet` for details.
     """
@@ -37,7 +37,7 @@ def resnet34(in_channels, num_classes):
 
 
 def resnet50(in_channels, num_classes):
-    r"""resnet50 model
+    r"""ResNet50 model
 
     See :class:`~ark.models.classification.resnet.ResNet` for details.
     """
@@ -49,7 +49,7 @@ def resnet50(in_channels, num_classes):
 
 
 def resnet101(in_channels, num_classes):
-    r"""resnet101 model
+    r"""ResNet101 model
 
     See :class:`~ark.models.classification.resnet.ResNet` for details.
     """
@@ -61,7 +61,7 @@ def resnet101(in_channels, num_classes):
 
 
 def resnet152(in_channels, num_classes):
-    r"""resnet152 model
+    r"""ResNet152 model
 
     See :class:`~ark.models.classification.resnet.ResNet` for details.
     """
