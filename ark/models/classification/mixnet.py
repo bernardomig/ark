@@ -10,34 +10,61 @@ from ark.nn.utils import round_by
 
 
 def mixnet_s(in_channels, num_classes):
+    r"""MixNet S
+
+    See :class:`~ark.models.classification.mixnet.MixNet` for details.
+    """
     return MixNetS(in_channels, num_classes)
 
 
 def mixnet_m(in_channels, num_classes):
+    r"""MixNet M
+
+    See :class:`~ark.models.classification.mixnet.MixNet` for details.
+    """
     return MixNetM(in_channels, num_classes)
 
 
 def mixnet_l(in_channels, num_classes):
+    r"""MixNet L
+
+    See :class:`~ark.models.classification.mixnet.MixNet` for details.
+    """
     return MixNetM(in_channels, num_classes, width_multiplier=1.3)
 
 
 class MixNet(nn.Sequential):
+    r"""MixNets implementation from the
+    `"MixConv: Mixed Depthwise Convolutional Kernels": 
+    <https://arxiv.org/abs/1907.09595>` paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+        stages: (list of list of :obj:`nn.Module`): the configuration for the 
+            stages of the network, excluding the stem. 
+        init_channels (int): the output channels of the stem conv
+        stage_channels (int): the output channels of all the stages
+        feature_channels (int): the desired output channels of the feature 
+            encoder
+    """
+
     def __init__(self, in_channels: int, num_classes: int,
-                 stages: List[List[int]],
+                 stages: List[List[nn.Module]],
                  init_channels: int,
-                 last_features: int,
-                 out_features: int):
+                 stage_channels: int,
+                 feature_channels: int):
         features = OrderedDict()
         features["stem"] = ConvBnReLU2d(in_channels, init_channels, 3, padding=1, stride=2)
         for idx, stage in enumerate(stages):
             features[f"stage{idx+ 1}"] = nn.Sequential(*stage)
-        features["tail"] = ConvBnReLU2d(last_features, out_features, 1)
+        features["tail"] = ConvBnReLU2d(stage_channels, feature_channels, 1)
         features = nn.Sequential(features)
 
         classifier = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
             nn.Flatten(),
-            nn.Linear(out_features, num_classes)
+            nn.Linear(feature_channels, num_classes)
         )
 
         super().__init__(OrderedDict([
@@ -47,6 +74,11 @@ class MixNet(nn.Sequential):
 
 
 class MixNetS(MixNet):
+    r"""Small version of the MixNet.
+
+    See :class:`~ark.models.classification.mixnet.MixNet` for details.
+    """
+
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.):
         def c(channels): return round_by(channels * width_multiplier)
 
@@ -78,11 +110,16 @@ class MixNetS(MixNet):
         super(MixNetS, self).__init__(in_channels, num_classes,
                                       stages=stages,
                                       init_channels=c(16),
-                                      last_features=c(200),
-                                      out_features=1536)
+                                      stage_channels=c(200),
+                                      feature_channels=1536)
 
 
 class MixNetM(MixNet):
+    r"""Medium version of the MixNet.
+
+    See :class:`~ark.models.classification.mixnet.MixNet` for details.
+    """
+
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.0):
         def c(channels): return round_by(channels * width_multiplier)
 
@@ -117,11 +154,13 @@ class MixNetM(MixNet):
         super(MixNetM, self).__init__(in_channels, num_classes,
                                       stages=stages,
                                       init_channels=c(24),
-                                      last_features=c(200),
-                                      out_features=1536)
+                                      stage_channels=c(200),
+                                      feature_channels=1536)
 
 
 class InvertedResidual(nn.Module):
+    r"""Inverted residual block for MixNets"""
+
     def __init__(self, in_channels: int, out_channels: int, kernel_sizes: Union[int, List[int]],
                  stride: int = 1,
                  expansion: int = 6,
