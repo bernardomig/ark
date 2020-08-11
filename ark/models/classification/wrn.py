@@ -45,7 +45,7 @@ class WRN(ResNet):
                  expansion: int = 4,
                  width_multiplier: float = 1.):
         super().__init__(
-            in_channels, num_classes, block_depth,
+            in_channels, num_classes,
             block=partial(Bottleneck, expansion=expansion, width_multiplier=width_multiplier),
             block_depth=block_depth,
             init_channels=64,
