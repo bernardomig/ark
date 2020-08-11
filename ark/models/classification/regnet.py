@@ -249,17 +249,17 @@ class BottleneckX(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1, group_width=1):
         super(BottleneckX, self).__init__()
 
-        self.conv1 = ConvBnReLU2d(in_channels, out_channels, 1)
-        self.conv2 = ConvBnReLU2d(out_channels, out_channels, 3, padding=1, stride=stride,
-                                  groups=out_channels // group_width)
-
-        self.conv3 = ConvBn2d(out_channels, out_channels, 1)
-
         self.downsample = (
             ConvBn2d(in_channels, out_channels, 1, stride=stride)
             if stride != 1 or in_channels != out_channels
             else nn.Identity()
         )
+
+        self.conv1 = ConvBnReLU2d(in_channels, out_channels, 1)
+        self.conv2 = ConvBnReLU2d(out_channels, out_channels, 3, padding=1, stride=stride,
+                                  groups=max(out_channels // group_width, 1))
+
+        self.conv3 = ConvBn2d(out_channels, out_channels, 1)
 
         self.activation = nn.ReLU(inplace=True)
 
