@@ -1,3 +1,4 @@
+from typing import List
 from collections import OrderedDict
 from functools import partial
 import torch
@@ -9,29 +10,62 @@ from ark.nn.utils import round_channels
 
 
 def mobilenetv3_small_1_0(in_channels, num_classes):
+    r"""MobileNetV3 Small with width 1.0
+
+    See :class:`~ark.models.classification.mobilenetv3.MobileNetV3` for details.
+    """
     return MobileNetV3Small(in_channels, num_classes)
 
 
 def mobilenetv3_small_0_75(in_channels, num_classes):
+    r"""MobileNetV3 Small with width 0.75
+
+    See :class:`~ark.models.classification.mobilenetv3.MobileNetV3` for details.
+    """
     return MobileNetV3Small(in_channels, num_classes, width_multiplier=0.75)
 
 
 def mobilenetv3_large_1_0(in_channels, num_classes):
+    r"""MobileNetV3 Large with width 1.0
+
+    See :class:`~ark.models.classification.mobilenetv3.MobileNetV3` for details.
+    """
     return MobileNetV3Large(in_channels, num_classes)
 
 
 def mobilenetv3_large_0_75(in_channels, num_classes):
+    r"""MobileNetV3 Large with width 0.75
+
+    See :class:`~ark.models.classification.mobilenetv3.MobileNetV3` for details.
+    """
     return MobileNetV3Large(in_channels, num_classes, width_multiplier=0.75)
 
 
 class MobileNetV3(nn.Sequential):
-    def __init__(self, in_channels, num_classes,
-                 stages,
-                 init_channels,
-                 stage_channels,
-                 feature_channels,
-                 classifier_channels,
-                 dropout_p):
+    r"""MobilenetV3 implementation from the 
+    `"Searching for MobileNetV3": <https://arxiv.org/abs/1905.02244>` paper.
+
+    Args:
+        in_channels (int): the input channels
+        num_classes (int): the number of the output classification classes
+        stages: (list of list of :obj:`nn.Module`): the configuration for the 
+            stages of the network, excluding the stem
+        init_channels (int): the initial channels of the stages. Sets the output
+             channels of the stem
+        stage_channels (int): the output channels of the stages
+        feature_channels (int): the output channels of the feature encoder. Sets
+            the output channels of the tail conv
+        classifier_channels (int): the width of the classifier
+        dropout_p (float): the dropout probability in the classifier
+    """
+
+    def __init__(self, in_channels: int, num_classes: int,
+                 stages: List[List[nn.Module]],
+                 init_channels: int,
+                 stage_channels: int,
+                 feature_channels: int,
+                 classifier_channels: int,
+                 dropout_p: float):
 
         features = OrderedDict()
         features["stem"] = ConvBnAct2d(in_channels, init_channels, 3,
@@ -60,6 +94,11 @@ class MobileNetV3(nn.Sequential):
 
 
 class MobileNetV3Small(MobileNetV3):
+    r"""Small version of the MobileNetV3.
+
+    See :class:`~ark.models.classification.mobilenetv3.MobileNetV3` for details.
+    """
+
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.):
         def c(channels): return round_channels(channels * width_multiplier)
 
@@ -94,6 +133,11 @@ class MobileNetV3Small(MobileNetV3):
 
 
 class MobileNetV3Large(MobileNetV3):
+    r"""Larger version of the MobileNetV3.
+
+    See :class:`~ark.models.classification.mobilenetv3.MobileNetV3` for details.
+    """
+
     def __init__(self, in_channels, num_classes, width_multiplier: float = 1.):
         def c(channels): return round_channels(channels * width_multiplier)
 
@@ -133,6 +177,8 @@ class MobileNetV3Large(MobileNetV3):
 
 
 class InvertedResidual(nn.Module):
+    activation_after_se: bool
+
     def __init__(self, in_channels: int, out_channels: int,
                  kernel_size: int,
                  stride: int,
@@ -141,9 +187,12 @@ class InvertedResidual(nn.Module):
                  use_se: bool = True):
         super(InvertedResidual, self).__init__()
 
+        # TODO: check if this is indeed correct
+        # this is the same as the implementation from
+        # https://github.com/d-li14/mobilenetv3.pytorch/
         self.activation_after_se = use_se and expansion != 1
 
-        width = round_by(expansion * in_channels)
+        width = round_channels(expansion * in_channels)
 
         self.conv1 = (
             ConvBnAct2d(in_channels, width, 1, activation=activation)
@@ -179,7 +228,7 @@ class InvertedResidual(nn.Module):
 class SqueezeExcitation(nn.Module):
     def __init__(self, in_channels, out_channels, reduction=4):
         super().__init__()
-        mid_channels = round_by(in_channels / reduction)
+        mid_channels = round_channels(in_channels / reduction)
         self.conv1 = nn.Conv2d(in_channels, mid_channels, 1)
         self.relu = nn.ReLU(inplace=True)
         self.conv2 = nn.Conv2d(mid_channels, out_channels, 1)
