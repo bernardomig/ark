@@ -176,7 +176,7 @@ class SEBlock(nn.Module):
     def __init__(self, in_channels, out_channels, reduction_ratio=4):
         super(SEBlock, self).__init__()
 
-        reduced_channels = round_by(in_channels / reduction_ratio, 4)
+        reduced_channels = round_channels(in_channels / reduction_ratio, 4)
 
         self.conv1 = nn.Conv2d(in_channels, reduced_channels, 1)
         self.activation = nn.ReLU(inplace=True)
