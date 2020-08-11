@@ -19,8 +19,8 @@ def densenet121(in_channels, num_classes):
     """
     return DenseNet(in_channels, num_classes,
                     growth=32,
-                    block_depth=(6, 12, 24, 16),
-                    init_features=64)
+                    block_depth=[6, 12, 24, 16],
+                    init_channels=64)
 
 
 def densenet161(in_channels, num_classes):
@@ -30,8 +30,8 @@ def densenet161(in_channels, num_classes):
     """
     return DenseNet(in_channels, num_classes,
                     growth=48,
-                    block_depth=(6, 12, 36, 24),
-                    init_features=96)
+                    block_depth=[6, 12, 36, 24],
+                    init_channels=96)
 
 
 def densenet169(in_channels, num_classes):
@@ -41,8 +41,8 @@ def densenet169(in_channels, num_classes):
     """
     return DenseNet(in_channels, num_classes,
                     growth=32,
-                    block_depth=(6, 12, 32, 32),
-                    init_features=64)
+                    block_depth=[6, 12, 32, 32],
+                    init_channels=64)
 
 
 def densenet201(in_channels, num_classes):
@@ -52,8 +52,8 @@ def densenet201(in_channels, num_classes):
     """
     return DenseNet(in_channels, num_classes,
                     growth=32,
-                    block_depth=(6, 12, 48, 32),
-                    init_features=64)
+                    block_depth=[6, 12, 48, 32],
+                    init_channels=64)
 
 
 class DenseNet(nn.Sequential):
