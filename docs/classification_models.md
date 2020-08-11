@@ -25,13 +25,13 @@ AlexNet implementation based on the paper [ImageNet Classification with Deep Con
 
 | Name                   | # Params | Eval Size |  Top-1  |  Top-5  | Weight                                                                          |
 | ---------------------- | -------: | --------- | :-----: | :-----: | ------------------------------------------------------------------------------- |
-| drn_c_26 <sup>1</sup>  |          | 224 @ 256 | 0.74864 | 0.92252 | [weight](https://files.deeplar.tk/ark-weights/drn_c_26-imagenet-25b1fc3f2b.pt)  |
-| drn_c_42 <sup>1</sup>  |          | 224 @ 256 | 0.76790 | 0.93308 | [weight](https://files.deeplar.tk/ark-weights/drn_c_42-imagenet-cb5cff5775.pt)  |
-| drn_c_58 <sup>1</sup>  |          | 224 @ 256 | 0.78046 | 0.93848 | [weight](https://files.deeplar.tk/ark-weights/drn_c_58-imagenet-0bbc7fb2ed.pt)  |
-| drn_d_22 <sup>1</sup>  |          | 224 @ 256 | 0.73918 | 0.91662 | [weight](https://files.deeplar.tk/ark-weights/drn_d_22-imagenet-784c51952f.pt)  |
-| drn_d_38 <sup>1</sup>  |          | 224 @ 256 | 0.75844 | 0.92842 | [weight](https://files.deeplar.tk/ark-weights/drn_d_38-imagenet-39a7863b82.pt)  |
-| drn_d_54 <sup>1</sup>  |          | 224 @ 256 | 0.78558 | 0.94016 | [weight](https://files.deeplar.tk/ark-weights/drn_d_54-imagenet-8c83e6312c.pt)  |
-| drn_d_105 <sup>1</sup> |          | 224 @ 256 | 0.79228 | 0.94312 | [weight](https://files.deeplar.tk/ark-weights/drn_d_105-imagenet-a27297fdc8.pt) |
+| drn_c_26 <sup>1</sup>  |   21.127 | 224 @ 256 | 0.74864 | 0.92252 | [weight](https://files.deeplar.tk/ark-weights/drn_c_26-imagenet-25b1fc3f2b.pt)  |
+| drn_c_42 <sup>1</sup>  |   31.235 | 224 @ 256 | 0.76790 | 0.93308 | [weight](https://files.deeplar.tk/ark-weights/drn_c_42-imagenet-cb5cff5775.pt)  |
+| drn_c_58 <sup>1</sup>  |   40.542 | 224 @ 256 | 0.78046 | 0.93848 | [weight](https://files.deeplar.tk/ark-weights/drn_c_58-imagenet-0bbc7fb2ed.pt)  |
+| drn_d_22 <sup>1</sup>  |   16.394 | 224 @ 256 | 0.73918 | 0.91662 | [weight](https://files.deeplar.tk/ark-weights/drn_d_22-imagenet-784c51952f.pt)  |
+| drn_d_38 <sup>1</sup>  |   26.502 | 224 @ 256 | 0.75844 | 0.92842 | [weight](https://files.deeplar.tk/ark-weights/drn_d_38-imagenet-39a7863b82.pt)  |
+| drn_d_54 <sup>1</sup>  |   35.809 | 224 @ 256 | 0.78558 | 0.94016 | [weight](https://files.deeplar.tk/ark-weights/drn_d_54-imagenet-8c83e6312c.pt)  |
+| drn_d_105 <sup>1</sup> |   54.801 | 224 @ 256 | 0.79228 | 0.94312 | [weight](https://files.deeplar.tk/ark-weights/drn_d_105-imagenet-a27297fdc8.pt) |
 
 <sup>1</sup> Weights ported from [fyu/drn](https://github.com/fyu/drn).
 
@@ -61,8 +61,6 @@ AlexNet implementation based on the paper [ImageNet Classification with Deep Con
 | mixnet_s |    4.135 | 224 @ 256 |       |       |        |
 | mixnet_m |    5.014 | 224 @ 256 |       |       |        |
 | mixnet_l |    7.329 | 224 @ 256 |       |       |        |
-
-<sup>1</sup> Weights ported from [rwightman/pytorch-image-models](https://github.com/rwightman/pytorch-image-models)
 
 ## MobileNetV2
 
