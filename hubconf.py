@@ -35,4 +35,10 @@ from ark.models.classification.vgg import (
     vgg11, vgg13, vgg16, vgg19)
 from ark.models.classification.wrn import wrn50_2_0, wrn101_2_0
 
+from ark.models.segmentation.bisenetv2 import bisenetv2
+from ark.models.segmentation.enet import enet
+from ark.models.segmentation.erfnet import erfnet
+from ark.models.segmentation.espnet import espnet, espnet_c
+from ark.models.segmentation.segnet import segnet
+
 dependencies = ['torch']
