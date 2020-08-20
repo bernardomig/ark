@@ -6,6 +6,7 @@ from torch import nn
 
 from ark.nn.easy import ConvBnReLU2d, ConvBn2d
 from ark.nn.functional import channel_shuffle
+from ark.utils.hub import register_model
 
 __all__ = [
     'ShuffleNetV2',

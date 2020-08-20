@@ -4,6 +4,7 @@ import torch
 from torch import nn
 
 from ark.nn.easy import ConvBn2d, ConvBnReLU2d
+from ark.utils.hub import register_model
 
 from .resnet import ResNet
 
