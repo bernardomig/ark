@@ -4,6 +4,7 @@ import torch
 from torch import nn
 
 from ark.nn.easy import ConvReLU2d
+from ark.utils.hub import register_model
 
 __all__ = [
     'SqueezeNet',
@@ -11,6 +12,10 @@ __all__ = [
 ]
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/squeezenet-imagenet-ed8e93b737.pt'},
+)
 def squeezenet(in_channels, num_classes):
     r"""SqueezeNet
 

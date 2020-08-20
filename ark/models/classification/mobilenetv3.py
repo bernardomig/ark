@@ -7,8 +7,13 @@ from torch.nn import functional as F
 
 from ark.nn.easy import ConvBnAct2d, ConvBn2d
 from ark.nn.utils import round_channels
+from ark.utils.hub import register_model
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv3_large_1_0-imagenet-8ceb1626c7.pt'},
+)
 def mobilenetv3_small_1_0(in_channels, num_classes):
     r"""MobileNetV3 Small with width 1.0
 
@@ -17,6 +22,10 @@ def mobilenetv3_small_1_0(in_channels, num_classes):
     return MobileNetV3Small(in_channels, num_classes)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv3_large_0_75-imagenet-e8aac9762b.pt'},
+)
 def mobilenetv3_small_0_75(in_channels, num_classes):
     r"""MobileNetV3 Small with width 0.75
 
@@ -25,6 +34,10 @@ def mobilenetv3_small_0_75(in_channels, num_classes):
     return MobileNetV3Small(in_channels, num_classes, width_multiplier=0.75)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv3_small_1_0-imagenet-a830b03e78.pt'},
+)
 def mobilenetv3_large_1_0(in_channels, num_classes):
     r"""MobileNetV3 Large with width 1.0
 
@@ -33,6 +46,10 @@ def mobilenetv3_large_1_0(in_channels, num_classes):
     return MobileNetV3Large(in_channels, num_classes)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv3_small_0_75-imagenet-295a26ddbc.pt'},
+)
 def mobilenetv3_large_0_75(in_channels, num_classes):
     r"""MobileNetV3 Large with width 0.75
 

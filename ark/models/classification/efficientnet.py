@@ -7,6 +7,7 @@ from torch.nn import functional as F
 from ark.nn import Swish
 from ark.nn.utils import round_channels
 from ark.nn.easy import ConvBn2d, ConvBnSwish2d
+from ark.utils.hub import register_model
 
 __all__ = [
     'EfficientNet',
@@ -16,84 +17,100 @@ __all__ = [
 ]
 
 
-def efficientnet_b0(in_channels, out_channels):
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b0-imagenet-b28f86c117.pt'},
+)
+def efficientnet_b0(in_channels, num_classes):
     r"""EfficientNet B0
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels)
+    return EfficientNet(in_channels, num_classes)
 
 
-def efficientnet_b1(in_channels, out_channels):
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b1-imagenet-7eb107fee3.pt'},
+)
+def efficientnet_b1(in_channels, num_classes):
     r"""EfficientNet B1
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels,
+    return EfficientNet(in_channels, num_classes,
                         depth_multiplier=1.1)
 
 
-def efficientnet_b2(in_channels, out_channels):
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b2-imagenet-03de86b71c.pt'},
+)
+def efficientnet_b2(in_channels, num_classes):
     r"""EfficientNet B2
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels,
+    return EfficientNet(in_channels, num_classes,
                         width_multiplier=1.1,
                         depth_multiplier=1.2,
                         dropout_rate=0.3)
 
 
-def efficientnet_b3(in_channels, out_channels):
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b3-imagenet-4105432b3b.pt'},
+)
+def efficientnet_b3(in_channels, num_classes):
     r"""EfficientNet B3
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels,
+    return EfficientNet(in_channels, num_classes,
                         width_multiplier=1.2,
                         depth_multiplier=1.4,
                         dropout_rate=0.3)
 
 
-def efficientnet_b4(in_channels, out_channels):
+def efficientnet_b4(in_channels, num_classes):
     r"""EfficientNet B4
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels,
+    return EfficientNet(in_channels, num_classes,
                         width_multiplier=1.4,
                         depth_multiplier=1.8,
                         dropout_rate=0.4)
 
 
-def efficientnet_b5(in_channels, out_channels):
+def efficientnet_b5(in_channels, num_classes):
     r"""EfficientNet B5
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels,
+    return EfficientNet(in_channels, num_classes,
                         width_multiplier=1.6,
                         depth_multiplier=2.2,
                         dropout_rate=0.4)
 
 
-def efficientnet_b6(in_channels, out_channels):
+def efficientnet_b6(in_channels, num_classes):
     r"""EfficientNet B6
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels,
+    return EfficientNet(in_channels, num_classes,
                         width_multiplier=1.8,
                         depth_multiplier=2.6,
                         dropout_rate=0.5)
 
 
-def efficientnet_b7(in_channels, out_channels):
+def efficientnet_b7(in_channels, num_classes):
     r"""EfficientNet B7
 
     See :class:`~ark.models.classification.efficientnet.EfficientNet` for details.
     """
-    return EfficientNet(in_channels, out_channels,
+    return EfficientNet(in_channels, num_classes,
                         width_multiplier=2.0,
                         depth_multiplier=3.1,
                         dropout_rate=0.5)

@@ -4,6 +4,7 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvBnReLU2d, ConvBn2d
+from ark.utils.hub import register_model
 
 __all__ = [
     'ResNet',
@@ -12,6 +13,10 @@ __all__ = [
 ]
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet18-imagenet-8d64fdf20f.pt'},
+)
 def resnet18(in_channels, num_classes):
     r"""ResNet18 model
 
@@ -24,6 +29,10 @@ def resnet18(in_channels, num_classes):
                   block_channels=[64, 128, 256, 512])
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet34-imagenet-0d9c6a03d7.pt'},
+)
 def resnet34(in_channels, num_classes):
     r"""ResNet34 model
 
@@ -36,6 +45,10 @@ def resnet34(in_channels, num_classes):
                   block_channels=[64, 128, 256, 512])
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet50-imagenet-c0d2bddaf7.pt'},
+)
 def resnet50(in_channels, num_classes):
     r"""ResNet50 model
 
@@ -48,6 +61,10 @@ def resnet50(in_channels, num_classes):
                   block_channels=[256, 512, 1024, 2048])
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet101-imagenet-cf7a8d28f0.pt'},
+)
 def resnet101(in_channels, num_classes):
     r"""ResNet101 model
 
@@ -60,6 +77,10 @@ def resnet101(in_channels, num_classes):
                   block_channels=[256, 512, 1024, 2048])
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet152-imagenet-d3e4a0eff4.pt'},
+)
 def resnet152(in_channels, num_classes):
     r"""ResNet152 model
 

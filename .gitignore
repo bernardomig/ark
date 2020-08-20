@@ -130,3 +130,6 @@ dmypy.json
 
 # vscode config directory
 .vscode
+
+# training directory 
+checkpoints

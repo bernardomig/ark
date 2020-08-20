@@ -4,26 +4,35 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvBnReLU2d, ConvBn2d
+from ark.utils.hub import register_model
 
 from .resnet import ResNet
 
 
-def wrn50_2_0(in_channels, out_channels):
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/wrn50_2_0-imagenet-58c3842933.pt'},
+)
+def wrn50_2_0(in_channels, num_classes):
     r"""Wide ResNet50 with width multiplier 2.0
 
     See :class:`~ark.models.classification.wrn.WRN` for details.
     """
-    return WRN(in_channels, out_channels,
+    return WRN(in_channels, num_classes,
                block_depth=[3, 4, 6, 3],
                width_multiplier=2.)
 
 
-def wrn101_2_0(in_channels, out_channels):
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/wrn101_2_0-imagenet-e4c5597950.pt'},
+)
+def wrn101_2_0(in_channels, num_classes):
     r"""Wide ResNet50 with width multiplier 2.0
 
     See :class:`~ark.models.classification.wrn.WRN` for details.
     """
-    return WRN(in_channels, out_channels,
+    return WRN(in_channels, num_classes,
                block_depth=[3, 4, 23, 3],
                width_multiplier=2.)
 

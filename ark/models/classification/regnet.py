@@ -5,8 +5,13 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvBn2d, ConvBnReLU2d
+from ark.utils.hub import register_model
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_002-imagenet-dc40ef1c36.pt'},
+)
 def regnetx_002(in_channels, num_classes):
     r"""RegNetX with 200M flops
 
@@ -15,6 +20,10 @@ def regnetx_002(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX, [1, 1, 4, 7], [24, 56, 152, 368], 8)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_004-imagenet-f2708d7db0.pt'},
+)
 def regnetx_004(in_channels, num_classes):
     r"""RegNetX with 400M flops
 
@@ -23,6 +32,10 @@ def regnetx_004(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX, [1, 2, 7, 12], [32, 64, 160, 384], 16)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_006-imagenet-e4462f6128.pt'},
+)
 def regnetx_006(in_channels, num_classes):
     r"""RegNetX with 600M flops
 
@@ -31,6 +44,10 @@ def regnetx_006(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX,  [1, 3, 5, 7], [48, 96, 240, 528], 24)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_008-imagenet-e0d97cccbf.pt'},
+)
 def regnetx_008(in_channels, num_classes):
     r"""RegNetX with 800M flops
 
@@ -39,6 +56,10 @@ def regnetx_008(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX,  [1, 3, 7, 5], [64, 128, 288, 672], 16)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_016-imagenet-bc694a4fb3.pt'},
+)
 def regnetx_016(in_channels, num_classes):
     r"""RegNetX with 1.6G flops
 
@@ -47,6 +68,10 @@ def regnetx_016(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX, [2, 4, 10, 2], [72, 168, 408, 912], 24)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_032-imagenet-897d6a187c.pt'},
+)
 def regnetx_032(in_channels, num_classes):
     r"""RegNetX with 3.2G flops
 
@@ -55,6 +80,10 @@ def regnetx_032(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX,  [2, 6, 15, 2], [96, 192, 432, 1008], 48)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_040-imagenet-f5bc702a82.pt'},
+)
 def regnetx_040(in_channels, num_classes):
     r"""RegNetX with 4.0G flops
 
@@ -63,6 +92,10 @@ def regnetx_040(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX, [2, 5, 14, 2], [80, 240, 560, 1360], 40)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_064-imagenet-14880ce230.pt'},
+)
 def regnetx_064(in_channels, num_classes):
     r"""RegNetX with 6.4G flops
 
@@ -71,6 +104,10 @@ def regnetx_064(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX,  [2, 4, 10, 1], [168, 392, 784, 1624], 56)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_080-imagenet-c1ea72c75e.pt'},
+)
 def regnetx_080(in_channels, num_classes):
     r"""RegNetX with 8.0G flops
 
@@ -79,6 +116,10 @@ def regnetx_080(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX, [2, 5, 15, 1], [80, 240, 720, 1920], 120)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_120-imagenet-1d9a4fb38e.pt'},
+)
 def regnetx_120(in_channels, num_classes):
     r"""RegNetX with 12G flops
 
@@ -87,6 +128,10 @@ def regnetx_120(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX,  [2, 5, 11, 1], [224, 448, 896, 2240], 112)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_160-imagenet-27aec19f17.pt'},
+)
 def regnetx_160(in_channels, num_classes):
     r"""RegNetX with 16G flops
 
@@ -95,6 +140,10 @@ def regnetx_160(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX,  [2, 6, 13, 1], [256, 512, 896, 2048], 128)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnetx_320-imagenet-498fddcb01.pt'},
+)
 def regnetx_320(in_channels, num_classes):
     r"""RegNetX with 32G flops
 
@@ -103,6 +152,10 @@ def regnetx_320(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckX, [2, 7, 13, 1], [336, 672, 1344, 2520], 168)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_002-imagenet-1febafaf91.pt'},
+)
 def regnety_002(in_channels, num_classes):
     r"""RegNetY with 200M flops
 
@@ -111,6 +164,10 @@ def regnety_002(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY, [1, 1, 4, 7], [24, 56, 152, 368], 8)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_004-imagenet-d52958c3f5.pt'},
+)
 def regnety_004(in_channels, num_classes):
     r"""RegNetY with 400M flops
 
@@ -119,6 +176,10 @@ def regnety_004(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY, [1, 3, 6, 6], [48, 104, 208, 440], 8)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_006-imagenet-aec4b5587e.pt'},
+)
 def regnety_006(in_channels, num_classes):
     r"""RegNetY with 600M flops
 
@@ -127,6 +188,10 @@ def regnety_006(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY, [1, 3, 7, 4], [48, 112, 256, 608], 16)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_008-imagenet-8e1cc4c9d6.pt'},
+)
 def regnety_008(in_channels, num_classes):
     r"""RegNetY with 800M flops
 
@@ -135,6 +200,10 @@ def regnety_008(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY,  [1, 3, 8, 2], [64, 128, 320, 768], 16)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_016-imagenet-0a5a3b2871.pt'},
+)
 def regnety_016(in_channels, num_classes):
     r"""RegNetY with 1.6G flops
 
@@ -143,6 +212,10 @@ def regnety_016(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY, [2, 6, 17, 2], [48, 120, 336, 888], 24)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_032-imagenet-86e0086c3c.pt'},
+)
 def regnety_032(in_channels, num_classes):
     r"""RegNetY with 3.2G flops
 
@@ -151,6 +224,10 @@ def regnety_032(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY,  [2, 5, 13, 1], [72, 216, 576, 1512], 24)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_040-imagenet-c9675e1d87.pt'},
+)
 def regnety_040(in_channels, num_classes):
     r"""RegNetY with 4.0G flops
 
@@ -159,6 +236,10 @@ def regnety_040(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY, [2, 6, 12, 2], [128, 192, 512, 1088], 64)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_064-imagenet-547954424d.pt'},
+)
 def regnety_064(in_channels, num_classes):
     r"""RegNetY with 6.4G flops
 
@@ -167,6 +248,10 @@ def regnety_064(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY,  [2, 7, 14, 2], [144, 288, 576, 1296], 72)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_080-imagenet-ed7c3ea940.pt'},
+)
 def regnety_080(in_channels, num_classes):
     r"""RegNetY with 8.0G flops
 
@@ -175,6 +260,10 @@ def regnety_080(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY, [2, 4, 10, 1], [168, 448, 896, 2016], 56)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_120-imagenet-5bbf19ecaa.pt'},
+)
 def regnety_120(in_channels, num_classes):
     r"""RegNetY with 12G flops
 
@@ -183,6 +272,10 @@ def regnety_120(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY,  [2, 5, 11, 1], [224, 448, 896, 2240], 112)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_160-imagenet-fab6e94e80.pt'},
+)
 def regnety_160(in_channels, num_classes):
     r"""RegNetY with 16G flops
 
@@ -191,6 +284,10 @@ def regnety_160(in_channels, num_classes):
     return RegNet(in_channels, num_classes, BottleneckY,  [2, 4, 11, 1], [224, 448, 1232, 3024], 112)
 
 
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/regnety_320-imagenet-9bce7d869e.pt'},
+)
 def regnety_320(in_channels, num_classes):
     r"""RegNetY with 32G flops
 

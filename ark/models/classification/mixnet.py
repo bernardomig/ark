@@ -53,7 +53,8 @@ class MixNet(nn.Sequential):
                  stages: List[List[nn.Module]],
                  init_channels: int,
                  stage_channels: int,
-                 feature_channels: int):
+                 feature_channels: int,
+                 dropout_p: float = 0.1):
         features = OrderedDict()
         features["stem"] = ConvBnReLU2d(in_channels, init_channels, 3, padding=1, stride=2)
         for idx, stage in enumerate(stages):
@@ -63,6 +64,7 @@ class MixNet(nn.Sequential):
 
         classifier = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
+            nn.Dropout(p=dropout_p),
             nn.Flatten(),
             nn.Linear(feature_channels, num_classes)
         )

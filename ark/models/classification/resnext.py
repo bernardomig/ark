@@ -14,29 +14,45 @@ __all__ = [
 ]
 
 
-def resnext50_32x4(in_channels, out_channels):
-    return ResNeXt(in_channels, out_channels,
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext50_32x4-imagenet-3c9f5bcfb5.pt'},
+)
+def resnext50_32x4(in_channels, num_classes):
+    return ResNeXt(in_channels, num_classes,
                    block_depth=[3, 4, 6, 3],
                    base_width=4,
                    cardinality=32)
 
 
-def resnext101_32x4(in_channels, out_channels):
-    return ResNeXt(in_channels, out_channels,
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext101_32x4-imagenet-4d1f34007f.pt'},
+)
+def resnext101_32x4(in_channels, num_classes):
+    return ResNeXt(in_channels, num_classes,
                    block_depth=[3, 4, 23, 3],
                    base_width=4,
                    cardinality=32)
 
 
-def resnext101_32x8(in_channels, out_channels):
-    return ResNeXt(in_channels, out_channels,
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext101_32x8-imagenet-464ed2f66d.pt'},
+)
+def resnext101_32x8(in_channels, num_classes):
+    return ResNeXt(in_channels, num_classes,
                    block_depth=[3, 4, 23, 3],
                    base_width=8,
                    cardinality=32)
 
 
-def resnext152_32x4(in_channels, out_channels):
-    return ResNeXt(in_channels, out_channels,
+@register_model(
+    imagenet1k={'in_channels': 3, 'num_classes': 1000,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext152_32x4-imagenet-26b33c40d2.pt'},
+)
+def resnext152_32x4(in_channels, num_classes):
+    return ResNeXt(in_channels, num_classes,
                    block_depth=[3, 8, 36, 3],
                    base_width=4,
                    cardinality=32)
@@ -46,7 +62,7 @@ class ResNeXt(ResNet):
     r"""
     """
 
-    def __init__(self, in_channels: int, out_channels: int,
+    def __init__(self, in_channels: int, num_classes: int,
                  block_depth: nn.Module,
                  init_channels: int = 64,
                  block_channels: Tuple[int, int, int, int] = [256, 512, 1024, 2048],
@@ -54,7 +70,7 @@ class ResNeXt(ResNet):
                  base_width: int = 64,
                  cardinality: int = 1):
         super(ResNeXt, self).__init__(
-            in_channels, out_channels,
+            in_channels, num_classes,
             block=partial(Bottleneck, expansion=expansion, base_width=base_width, cardinality=cardinality),
             block_depth=block_depth,
             init_channels=64,

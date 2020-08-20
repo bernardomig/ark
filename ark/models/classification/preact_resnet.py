@@ -108,11 +108,12 @@ class PreactResNet(nn.Sequential):
         ]))
 
         classifier = nn.Sequential(
-            nn.BatchNorm2d(e * 512),
+            nn.BatchNorm2d(c[3]),
             nn.ReLU(inplace=True),
             nn.AdaptiveAvgPool2d(1),
             nn.Flatten(),
-            nn.Linear(e * 512, num_classes),
+            nn.Dropout(p=0.2),
+            nn.Linear(c[3], num_classes),
         )
 
         super(PreactResNet, self).__init__(OrderedDict([
