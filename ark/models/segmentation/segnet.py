@@ -3,9 +3,13 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvBnReLU2d
+from ark.utils.hub import register_model
 
 
-def segnet(in_channels=3, out_channels=19):
+@register_model(
+    cityscapes={'in_channels': 3, 'out_channels': 19,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/segnet-cityscapes-2770978b16.pt'})
+def segnet(in_channels, out_channels):
     return SegNet(in_channels, out_channels)
 
 
