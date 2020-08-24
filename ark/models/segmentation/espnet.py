@@ -11,15 +11,15 @@ from ark.utils.hub import register_model
     cityscapes={'in_channels': 3, 'out_channels': 19,
                 'state_dict': 'https://files.deeplar.tk/ark-weights/espnet-cityscapes-d6791c4598.pt'},
 )
-def espnet(in_channels, out_channels, alphas=[2, 3]):
+def espnet(in_channels, out_channels, alphas=[2, 8]):
     return ESPNet(in_channels, out_channels, alphas=alphas)
 
 
-def espnet_a(in_channels, out_channels, alphas=[2, 3]):
+def espnet_a(in_channels, out_channels, alphas=[2, 8]):
     return ESPNet_ABC(in_channels, out_channels, alphas=alphas, use_pyramids=False, use_connections=False)
 
 
-def espnet_b(in_channels, out_channels, alphas=[2, 3]):
+def espnet_b(in_channels, out_channels, alphas=[2, 8]):
     return ESPNet_ABC(in_channels, out_channels, alphas=alphas, use_pyramids=False, use_connections=True)
 
 
@@ -27,7 +27,7 @@ def espnet_b(in_channels, out_channels, alphas=[2, 3]):
     cityscapes={'in_channels': 3, 'out_channels': 19,
                 'state_dict': 'https://files.deeplar.tk/ark-weights/espnet_c-cityscapes-1f76fe4247.pt'},
 )
-def espnet_c(in_channels, out_channels, alphas=[2, 3]):
+def espnet_c(in_channels, out_channels, alphas=[2, 8]):
     return ESPNet_ABC(in_channels, out_channels, alphas=alphas, use_pyramids=True, use_connections=True)
 
 
