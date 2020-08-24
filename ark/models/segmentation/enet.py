@@ -13,7 +13,7 @@ __all__ = ['ENet', 'enet']
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/enet-cityscapes-6595aaed11.pt'},
+                'state_dict': 'https://files.deeplar.tk/ark-weights/enet-cityscapes-d1d1846e3e.pt'},
 )
 def enet(in_channels, out_channels):
     return ENet(in_channels, out_channels)
@@ -196,9 +196,7 @@ class UpsamplingBlock(nn.Module):
             ('bn', nn.BatchNorm2d(width)),
             ('relu', nn.PReLU()),
         ]))
-        # TODO: self.conv3 should be a ConvBn2d (no activation!)
-        #       retraining a new model is required
-        self.conv3 = ConvBnPReLU2d(width, out_channels, 1)
+        self.conv3 = ConvBn2d(width, out_channels, 1)
         self.dropout = nn.Dropout2d(p=dropout_p)
 
         self.upsample = nn.ModuleDict({

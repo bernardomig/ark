@@ -6,6 +6,14 @@
 | --------- | ---------- | -------: | --------- | :------: | :----: | --------------------------------------------------------------------------------- |
 | bisenetv2 | Cityscapes |    3.359 | 2048x1024 |  0.9541  | 0.7398 | [weight](https://files.deeplar.tk/ark-weights/bisenetv2-cityscapes-b7183974cf.pt) |
 
+## ContextNet
+
+| Name         | Dataset    | # Params | Eval Size | Accuracy |  mIoU  | Weight                                                                               |
+| ------------ | ---------- | -------: | --------- | :------: | :----: | ------------------------------------------------------------------------------------ |
+| contextnet12 | Cityscapes |          | 2048x1024 |          |        |                                                                                      |
+| contextnet14 | Cityscapes |          | 2048x1024 |  0.9404  | 0.6710 | [weight](https://files.deeplar.tk/ark-weights/contextnet14-cityscapes-15dc9302ca.pt) |
+| contextnet18 | Cityscapes |          | 2048x1024 |  0.9338  | 0.6332 | [weight](https://files.deeplar.tk/ark-weights/contextnet18-cityscapes-40bf30973d.pt) |
+
 ## ENet
 
 | Name | Dataset    | # Params | Eval Size | Accuracy |  mIoU  | Weight                                                                       |

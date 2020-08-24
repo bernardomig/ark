@@ -2,6 +2,7 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvBn2d, ConvBnReLU2d
+from ark.utils.hub import register_model
 
 __all__ = [
     'ContextNet',
@@ -11,17 +12,29 @@ __all__ = [
 ]
 
 
+@register_model(
+    cityscapes={'in_channels': 3, 'out_channels': 19,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/contextnet12-cityscapes-35f9d5cfc2.pt'},
+)
 def contextnet12(in_channels=3, out_channels=19):
     return ContextNet(in_channels, out_channels,
                       scale_factor=2)
 
 
-def contextnet14(in_channels=3, out_channels=19, width_multiplier=1):
+@register_model(
+    cityscapes={'in_channels': 3, 'out_channels': 19,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/contextnet14-cityscapes-15dc9302ca.pt'},
+)
+def contextnet14(in_channels, out_channels, width_multiplier=1):
     return ContextNet(in_channels, out_channels,
                       scale_factor=4,
                       width_multiplier=width_multiplier)
 
 
+@register_model(
+    cityscapes={'in_channels': 3, 'out_channels': 19,
+                'state_dict': 'https://files.deeplar.tk/ark-weights/contextnet18-cityscapes-40bf30973d.pt'},
+)
 def contextnet18(in_channels=3, out_channels=19):
     return ContextNet(in_channels, out_channels,
                       scale_factor=8)
