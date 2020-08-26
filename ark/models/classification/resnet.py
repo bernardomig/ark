@@ -1,5 +1,6 @@
 from typing import Tuple
 from collections import OrderedDict
+import torch
 from torch import nn
 from torch.nn import functional as F
 
@@ -141,6 +142,26 @@ class ResNet(nn.Sequential):
             ('classifier', classifier),
         ]))
 
+    @torch.jit.unused
+    def replace_stride_with_dilation(self, output_stride):
+        assert output_stride in {8, 16, 32}
+
+        if output_stride == 32:
+            for block in self.features.layer3.children():
+                block.replace_stride_with_dilation(stride=2, dilation=1)
+            for block in self.features.layer4.children():
+                block.replace_stride_with_dilation(stride=2, dilation=1)
+        elif output_stride == 16:
+            for block in self.features.layer3.children():
+                block.replace_stride_with_dilation(stride=1, dilation=2)
+            for block in self.features.layer4.children():
+                block.replace_stride_with_dilation(stride=2, dilation=2)
+        elif output_stride == 8:
+            for block in self.features.layer3.children():
+                block.replace_stride_with_dilation(stride=1, dilation=2)
+            for block in self.features.layer4.children():
+                block.replace_stride_with_dilation(stride=1, dilation=4)
+
 
 class BasicBlock(nn.Module):
     def __init__(self, in_channels: int, out_channels: int, stride: int = 1):
@@ -162,6 +183,17 @@ class BasicBlock(nn.Module):
         x = self.conv2(x)
         residual = self.downsample(input)
         return self.activation(x + residual)
+
+    @torch.jit.unused
+    def replace_stride_with_dilation(self, stride, dilation):
+        from torch.nn.modules.utils import _pair
+        self.conv1.conv.stride = _pair(stride)
+        self.conv1.conv.dilation = _pair(dilation)
+        self.conv1.conv.padding = _pair(dilation)
+        self.conv2.conv.dilation = _pair(dilation)
+        self.conv2.conv.padding = _pair(dilation)
+        if not isinstance(self.downsample, nn.Identity):
+            self.downsample.conv.stride = _pair(stride)
 
 
 class Bottleneck(nn.Module):
@@ -190,3 +222,12 @@ class Bottleneck(nn.Module):
         x = self.conv3(x)
         residual = self.downsample(input)
         return self.activation(x + residual)
+
+    @torch.jit.unused
+    def replace_stride_with_dilation(self, stride, dilation):
+        from torch.nn.modules.utils import _pair
+        self.conv2.conv.stride = _pair(stride)
+        self.conv2.conv.dilation = _pair(dilation)
+        self.conv2.conv.padding = _pair(dilation)
+        if not isinstance(self.downsample, nn.Identity):
+            self.downsample.conv.stride = _pair(stride)
