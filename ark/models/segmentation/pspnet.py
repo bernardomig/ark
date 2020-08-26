@@ -9,7 +9,7 @@ from ark.utils.hub import register_model
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/pspnet_resnet18-cityscapes-30fadb3832.pt'},
+                'state_dict': 'https://files.deeplar.tk/ark-weights/pspnet_resnet18-cityscapes-74cdcf03c8.pt'},
 )
 def pspnet_resnet18(in_channels, out_channels):
     from ark.models.classification.resnet import resnet18
@@ -21,7 +21,7 @@ def pspnet_resnet18(in_channels, out_channels):
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/pspnet_resnet34-cityscapes-264b2f6d2b.pt'},
+                'state_dict': 'https://files.deeplar.tk/ark-weights/pspnet_resnet34-cityscapes-6b341e14a4.pt'},
 )
 def pspnet_resnet34(in_channels, out_channels):
     from ark.models.classification.resnet import resnet34
