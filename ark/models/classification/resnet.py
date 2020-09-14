@@ -154,8 +154,8 @@ class ResNet(nn.Sequential):
         elif output_stride == 16:
             for block in self.features.layer3.children():
                 block.replace_stride_with_dilation(stride=1, dilation=2)
-            for block in self.features.layer4.children():
-                block.replace_stride_with_dilation(stride=2, dilation=2)
+            for idx, block in enumerate(self.features.layer4.children()):
+                block.replace_stride_with_dilation(stride=2 if idx == 0 else 1, dilation=2)
         elif output_stride == 8:
             for block in self.features.layer3.children():
                 block.replace_stride_with_dilation(stride=1, dilation=2)

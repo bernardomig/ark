@@ -85,8 +85,8 @@ def mobilenetv2_0_10(in_channels, num_classes):
 
 
 class MobileNetV2(nn.Sequential):
-    r"""MobilenetV2 implementation from 
-    `"MobileNetV2: Inverted Residuals and Linear Bottlenecks": 
+    r"""MobilenetV2 implementation from
+    `"MobileNetV2: Inverted Residuals and Linear Bottlenecks":
     <https://arxiv.org/abs/1801.04381>`_ paper.
 
     Args:
@@ -135,6 +135,19 @@ class MobileNetV2(nn.Sequential):
             ('classifier', classifier),
         ]))
 
+    def replace_stride_with_dilation(self, output_stride):
+        from itertools import chain
+        assert output_stride in {8, 16, 32}
+        features = self.features
+
+        strides = [1 if output_stride == 8 else 2, 2 if output_stride == 32 else 1]
+        dilation = [2 if output_stride == 8 else 1, 4 if output_stride == 8 else 2 if output_stride == 16 else 1]
+
+        for i, block in enumerate(chain(features.layer4.children(), features.layer5.children())):
+            block.replace_stride_with_dilation(stride=strides[0] if i == 0 else 1, dilation=dilation[0])
+        for i, block in enumerate(chain(features.layer6.children(), features.layer7.children())):
+            block.replace_stride_with_dilation(stride=strides[1] if i == 0 else 1, dilation=dilation[1])
+
 
 class InvertedResidual(nn.Module):
     r"""Inverted Residual block of MobilenetV2.
@@ -168,6 +181,12 @@ class InvertedResidual(nn.Module):
         if input.shape == x.shape:
             x = x + input
         return x
+
+    def replace_stride_with_dilation(self, stride, dilation):
+        from torch.nn.modules.utils import _pair
+        self.conv2.conv.stride = _pair(stride)
+        self.conv2.conv.dilation = _pair(dilation)
+        self.conv2.conv.padding = _pair(dilation)
 
 
 class ConvBnReLU62d(nn.Sequential):
