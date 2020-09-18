@@ -4,6 +4,8 @@ from functools import wraps
 
 __all__ = ['register_model']
 
+MIRROR_URL = 'https://ark-weights.s3.eu-central.stackpathstorage.com/'
+
 
 def register_model(**configurations: Dict):
     def annotate_fn(model_fn):
@@ -24,6 +26,7 @@ def register_model(**configurations: Dict):
                     del config['state_dict']
                 else:
                     state_dict_url = config.pop('state_dict')
+                    state_dict_url = MIRROR_URL + state_dict_url
                 config.update(kwargs)
                 model = model_fn(*args, **config)
                 if load_state_dict:
