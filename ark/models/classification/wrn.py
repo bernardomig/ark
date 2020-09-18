@@ -11,7 +11,7 @@ from .resnet import ResNet
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/wrn50_2_0-imagenet-58c3842933.pt'},
+                'state_dict': 'wrn50_2_0-imagenet-58c3842933.pt'},
 )
 def wrn50_2_0(in_channels, num_classes):
     r"""Wide ResNet50 with width multiplier 2.0
@@ -25,7 +25,7 @@ def wrn50_2_0(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/wrn101_2_0-imagenet-e4c5597950.pt'},
+                'state_dict': 'wrn101_2_0-imagenet-e4c5597950.pt'},
 )
 def wrn101_2_0(in_channels, num_classes):
     r"""Wide ResNet50 with width multiplier 2.0

@@ -13,7 +13,7 @@ __all__ = ['ENet', 'enet']
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/enet-cityscapes-d1d1846e3e.pt'},
+                'state_dict': 'enet-cityscapes-d1d1846e3e.pt'},
 )
 def enet(in_channels, out_channels):
     return ENet(in_channels, out_channels)

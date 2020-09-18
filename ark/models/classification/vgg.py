@@ -10,7 +10,7 @@ from ark.utils.hub import register_model
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/vgg11-imagenet-3ba49f9647.pt'},
+                'state_dict': 'vgg11-imagenet-3ba49f9647.pt'},
 )
 def vgg11(in_channels, num_classes):
     r"""VGG11
@@ -22,7 +22,7 @@ def vgg11(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/vgg13-imagenet-37b6a8b641.pt'},
+                'state_dict': 'vgg13-imagenet-37b6a8b641.pt'},
 )
 def vgg13(in_channels, num_classes):
     r"""VGG13
@@ -34,7 +34,7 @@ def vgg13(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/vgg16-imagenet-b546252746.pt'},
+                'state_dict': 'vgg16-imagenet-b546252746.pt'},
 )
 def vgg16(in_channels, num_classes):
     r"""VGG16
@@ -46,7 +46,7 @@ def vgg16(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/vgg19-imagenet-6ff0e0ad02.pt'},
+                'state_dict': 'vgg19-imagenet-6ff0e0ad02.pt'},
 )
 def vgg19(in_channels, num_classes):
     r"""VGG19

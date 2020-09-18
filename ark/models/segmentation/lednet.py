@@ -17,7 +17,7 @@ __all__ = [
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/lednet-cityscapes-9fa2a8ee12.pt'},
+                'state_dict': 'lednet-cityscapes-9fa2a8ee12.pt'},
 )
 def lednet(in_channels, out_channels):
     return LedNet(in_channels, out_channels)

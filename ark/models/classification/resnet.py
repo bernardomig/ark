@@ -16,7 +16,7 @@ __all__ = [
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet18-imagenet-8d64fdf20f.pt'},
+                'state_dict': 'resnet18-imagenet-8d64fdf20f.pt'},
 )
 def resnet18(in_channels, num_classes):
     r"""ResNet18 model
@@ -32,7 +32,7 @@ def resnet18(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet34-imagenet-0d9c6a03d7.pt'},
+                'state_dict': 'resnet34-imagenet-0d9c6a03d7.pt'},
 )
 def resnet34(in_channels, num_classes):
     r"""ResNet34 model
@@ -48,7 +48,7 @@ def resnet34(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet50-imagenet-c0d2bddaf7.pt'},
+                'state_dict': 'resnet50-imagenet-c0d2bddaf7.pt'},
 )
 def resnet50(in_channels, num_classes):
     r"""ResNet50 model
@@ -64,7 +64,7 @@ def resnet50(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet101-imagenet-cf7a8d28f0.pt'},
+                'state_dict': 'resnet101-imagenet-cf7a8d28f0.pt'},
 )
 def resnet101(in_channels, num_classes):
     r"""ResNet101 model
@@ -80,7 +80,7 @@ def resnet101(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnet152-imagenet-d3e4a0eff4.pt'},
+                'state_dict': 'resnet152-imagenet-d3e4a0eff4.pt'},
 )
 def resnet152(in_channels, num_classes):
     r"""ResNet152 model

@@ -14,7 +14,7 @@ __all__ = [
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/squeezenet-imagenet-ed8e93b737.pt'},
+                'state_dict': 'squeezenet-imagenet-ed8e93b737.pt'},
 )
 def squeezenet(in_channels, num_classes):
     r"""SqueezeNet

@@ -41,7 +41,7 @@ def drn_a_50(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/drn_c_26-imagenet-25b1fc3f2b.pt'},
+                'state_dict': 'drn_c_26-imagenet-25b1fc3f2b.pt'},
 )
 def drn_c_26(in_channels, num_classes):
     r"""DRN Variant C with 26 layers.
@@ -57,7 +57,7 @@ def drn_c_26(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/drn_c_42-imagenet-cb5cff5775.pt'},
+                'state_dict': 'drn_c_42-imagenet-cb5cff5775.pt'},
 )
 def drn_c_42(in_channels, num_classes):
     r"""DRN Variant C with 42 layers.
@@ -73,7 +73,7 @@ def drn_c_42(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/drn_c_58-imagenet-0bbc7fb2ed.pt'},
+                'state_dict': 'drn_c_58-imagenet-0bbc7fb2ed.pt'},
 )
 def drn_c_58(in_channels, num_classes):
     r"""DRN Variant C with 58 layers.
@@ -89,7 +89,7 @@ def drn_c_58(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/drn_d_22-imagenet-784c51952f.pt'},
+                'state_dict': 'drn_d_22-imagenet-784c51952f.pt'},
 )
 def drn_d_22(in_channels, num_classes):
     r"""DRN Variant D with 22 layers.
@@ -117,7 +117,7 @@ def drn_d_24(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/drn_d_38-imagenet-39a7863b82.pt'},
+                'state_dict': 'drn_d_38-imagenet-39a7863b82.pt'},
 )
 def drn_d_38(in_channels, num_classes):
     r"""DRN Variant D with 38 layers.
@@ -145,7 +145,7 @@ def drn_d_40(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/drn_d_54-imagenet-8c83e6312c.pt'},
+                'state_dict': 'drn_d_54-imagenet-8c83e6312c.pt'},
 )
 def drn_d_54(in_channels, num_classes):
     r"""DRN Variant D with 54 layers.
@@ -173,7 +173,7 @@ def drn_d_56(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/drn_d_105-imagenet-a27297fdc8.pt'},
+                'state_dict': 'drn_d_105-imagenet-a27297fdc8.pt'},
 )
 def drn_d_105(in_channels, num_classes):
     r"""DRN Variant D with 105 layers.

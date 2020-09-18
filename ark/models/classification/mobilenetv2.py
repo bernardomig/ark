@@ -14,7 +14,7 @@ __all__ = [
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv2_1_0-imagenet-bf3dd96df3.pt'},
+                'state_dict': 'mobilenetv2_1_0-imagenet-bf3dd96df3.pt'},
 )
 def mobilenetv2_1_0(in_channels, num_classes):
     r"""MobileNetV2 with width 1.0
@@ -26,7 +26,7 @@ def mobilenetv2_1_0(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv2_0_75-imagenet-34c9a7dc0c.pt'},
+                'state_dict': 'mobilenetv2_0_75-imagenet-34c9a7dc0c.pt'},
 )
 def mobilenetv2_0_75(in_channels, num_classes):
     r"""MobileNetV2 with width 0.75
@@ -38,7 +38,7 @@ def mobilenetv2_0_75(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv2_0_50-imagenet-228a3ef7f5.pt'},
+                'state_dict': 'mobilenetv2_0_50-imagenet-228a3ef7f5.pt'},
 )
 def mobilenetv2_0_50(in_channels, num_classes):
     r"""MobileNetV2 with width 0.50
@@ -50,7 +50,7 @@ def mobilenetv2_0_50(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv2_0_35-imagenet-2aafa73305.pt'},
+                'state_dict': 'mobilenetv2_0_35-imagenet-2aafa73305.pt'},
 )
 def mobilenetv2_0_35(in_channels, num_classes):
     r"""MobileNetV2 with width 0.35
@@ -62,7 +62,7 @@ def mobilenetv2_0_35(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv2_0_25-imagenet-1657878274.pt'},
+                'state_dict': 'mobilenetv2_0_25-imagenet-1657878274.pt'},
 )
 def mobilenetv2_0_25(in_channels, num_classes):
     r"""MobileNetV2 with width 0.25
@@ -74,7 +74,7 @@ def mobilenetv2_0_25(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/mobilenetv2_0_10-imagenet-00c0863e22.pt'},
+                'state_dict': 'mobilenetv2_0_10-imagenet-00c0863e22.pt'},
 )
 def mobilenetv2_0_10(in_channels, num_classes):
     r"""MobileNetV2 with width 0.10

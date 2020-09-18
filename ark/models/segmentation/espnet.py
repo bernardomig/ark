@@ -9,7 +9,7 @@ from ark.utils.hub import register_model
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/espnet-cityscapes-d6791c4598.pt'},
+                'state_dict': 'espnet-cityscapes-d6791c4598.pt'},
 )
 def espnet(in_channels, out_channels, alphas=[2, 8]):
     return ESPNet(in_channels, out_channels, alphas=alphas)
@@ -25,7 +25,7 @@ def espnet_b(in_channels, out_channels, alphas=[2, 8]):
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/espnet_c-cityscapes-1f76fe4247.pt'},
+                'state_dict': 'espnet_c-cityscapes-1f76fe4247.pt'},
 )
 def espnet_c(in_channels, out_channels, alphas=[2, 8]):
     return ESPNet_ABC(in_channels, out_channels, alphas=alphas, use_pyramids=True, use_connections=True)

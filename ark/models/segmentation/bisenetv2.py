@@ -16,7 +16,7 @@ __all__ = [
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/bisenetv2-cityscapes-b7183974cf.pt'},
+                'state_dict': 'bisenetv2-cityscapes-b7183974cf.pt'},
 )
 def bisenetv2(in_channels, out_channels):
     return BisenetV2(in_channels, out_channels,

@@ -7,7 +7,7 @@ from ark.utils.hub import register_model
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/erfnet-cityscapes-b3c041fa10.pt'},
+                'state_dict': 'erfnet-cityscapes-b3c041fa10.pt'},
 )
 def erfnet(in_channels, out_channels):
     return ERFNet(in_channels, out_channels)

@@ -8,7 +8,7 @@ __all__ = ['AlexNet', 'alexnet']
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/alexnet-imagenet-30d827d4ff.pt'},
+                'state_dict': 'alexnet-imagenet-30d827d4ff.pt'},
 )
 def alexnet(in_channels, num_classes):
     r"""Alexnet model.

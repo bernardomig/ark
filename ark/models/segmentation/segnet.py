@@ -8,7 +8,7 @@ from ark.utils.hub import register_model
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/segnet-cityscapes-2770978b16.pt'})
+                'state_dict': 'segnet-cityscapes-2770978b16.pt'})
 def segnet(in_channels, out_channels):
     return SegNet(in_channels, out_channels)
 

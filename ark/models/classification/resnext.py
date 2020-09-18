@@ -17,7 +17,7 @@ __all__ = [
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext50_32x4-imagenet-3c9f5bcfb5.pt'},
+                'state_dict': 'resnext50_32x4-imagenet-3c9f5bcfb5.pt'},
 )
 def resnext50_32x4(in_channels, num_classes):
     return ResNeXt(in_channels, num_classes,
@@ -28,7 +28,7 @@ def resnext50_32x4(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext101_32x4-imagenet-4d1f34007f.pt'},
+                'state_dict': 'resnext101_32x4-imagenet-4d1f34007f.pt'},
 )
 def resnext101_32x4(in_channels, num_classes):
     return ResNeXt(in_channels, num_classes,
@@ -39,7 +39,7 @@ def resnext101_32x4(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext101_32x8-imagenet-464ed2f66d.pt'},
+                'state_dict': 'resnext101_32x8-imagenet-464ed2f66d.pt'},
 )
 def resnext101_32x8(in_channels, num_classes):
     return ResNeXt(in_channels, num_classes,
@@ -50,7 +50,7 @@ def resnext101_32x8(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/resnext152_32x4-imagenet-26b33c40d2.pt'},
+                'state_dict': 'resnext152_32x4-imagenet-26b33c40d2.pt'},
 )
 def resnext152_32x4(in_channels, num_classes):
     return ResNeXt(in_channels, num_classes,

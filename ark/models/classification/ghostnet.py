@@ -14,7 +14,7 @@ __all__ = ['GhostNet', 'ghostnet_1_0']
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/ghostnet_1_0-imagenet-9364bb1a07.pt'},
+                'state_dict': 'ghostnet_1_0-imagenet-9364bb1a07.pt'},
 )
 def ghostnet_1_0(in_channels, num_classes):
     r"""GhostNet with width 1.0

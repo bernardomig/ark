@@ -9,7 +9,7 @@ from ark.utils.hub import register_model
 
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/fastscnn-cityscapes-d94d460efe.pt'},
+                'state_dict': 'fastscnn-cityscapes-d94d460efe.pt'},
 )
 def fastscnn(in_channels, out_channels):
     return FastSCNN(in_channels, out_channels)

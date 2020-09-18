@@ -19,7 +19,7 @@ __all__ = [
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b0-imagenet-b28f86c117.pt'},
+                'state_dict': 'efficientnet_b0-imagenet-b28f86c117.pt'},
 )
 def efficientnet_b0(in_channels, num_classes):
     r"""EfficientNet B0
@@ -31,7 +31,7 @@ def efficientnet_b0(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b1-imagenet-7eb107fee3.pt'},
+                'state_dict': 'efficientnet_b1-imagenet-7eb107fee3.pt'},
 )
 def efficientnet_b1(in_channels, num_classes):
     r"""EfficientNet B1
@@ -44,7 +44,7 @@ def efficientnet_b1(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b2-imagenet-03de86b71c.pt'},
+                'state_dict': 'efficientnet_b2-imagenet-03de86b71c.pt'},
 )
 def efficientnet_b2(in_channels, num_classes):
     r"""EfficientNet B2
@@ -59,7 +59,7 @@ def efficientnet_b2(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/efficientnet_b3-imagenet-4105432b3b.pt'},
+                'state_dict': 'efficientnet_b3-imagenet-4105432b3b.pt'},
 )
 def efficientnet_b3(in_channels, num_classes):
     r"""EfficientNet B3

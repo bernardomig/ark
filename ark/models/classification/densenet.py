@@ -15,7 +15,7 @@ __all__ = [
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/densenet121-imagenet-91fe98d048.pt'},
+                'state_dict': 'densenet121-imagenet-91fe98d048.pt'},
 )
 def densenet121(in_channels, num_classes):
     r"""DenseNet121 model
@@ -30,7 +30,7 @@ def densenet121(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/densenet161-imagenet-87d5fabe27.pt'},
+                'state_dict': 'densenet161-imagenet-87d5fabe27.pt'},
 )
 def densenet161(in_channels, num_classes):
     r"""DenseNet161 model
@@ -45,7 +45,7 @@ def densenet161(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/densenet169-imagenet-30a50ee361.pt'},
+                'state_dict': 'densenet169-imagenet-30a50ee361.pt'},
 )
 def densenet169(in_channels, num_classes):
     r"""DenseNet169 model
@@ -60,7 +60,7 @@ def densenet169(in_channels, num_classes):
 
 @register_model(
     imagenet1k={'in_channels': 3, 'num_classes': 1000,
-                'state_dict': 'https://files.deeplar.tk/ark-weights/densenet201-imagenet-1ab44cb57e.pt'},
+                'state_dict': 'densenet201-imagenet-1ab44cb57e.pt'},
 )
 def densenet201(in_channels, num_classes):
     r"""DenseNet201 model
