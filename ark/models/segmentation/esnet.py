@@ -4,8 +4,14 @@ from torch import nn
 from torch.nn import functional as F
 
 from ark.nn.easy import ConvReLU2d, ConvBn2d, ConvBnReLU2d
+from ark.utils.hub import register_model
 
 
+@register_model(
+    cityscapes={'in_channels': 3,
+                'out_channels': 19,
+                'state_dict': 'esnet-cityscapes-a2fa1056cc.pt'},
+)
 def esnet(in_channels, out_channels):
     return ESNet(in_channels, out_channels)
 
