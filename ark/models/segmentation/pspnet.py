@@ -39,6 +39,14 @@ def pspnet_resnet50(in_channels, out_channels):
     return PSPNet(features, out_channels, feature_channels=2048, ppm_channels=256)
 
 
+def pspnet_resnet101(in_channels, out_channels):
+    from ark.models.classification.resnet import resnet101
+    model = resnet101(in_channels, 1)
+    model.replace_stride_with_dilation(8)
+    features = model.features
+    return PSPNet(features, out_channels, feature_channels=2048, ppm_channels=256)
+
+
 class PSPNet(nn.Module):
     def __init__(self, feature_extractor, out_channels, feature_channels, ppm_channels):
         super().__init__()
