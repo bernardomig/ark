@@ -44,7 +44,10 @@ from ark.models.segmentation.esnet import esnet
 from ark.models.segmentation.espnet import espnet, espnet_c
 from ark.models.segmentation.fastscnn import fastscnn
 from ark.models.segmentation.lednet import lednet
-from ark.models.segmentation.pspnet import pspnet_resnet18, pspnet_resnet34
+from ark.models.segmentation.lwrefinenet import (
+    lwrefinenet_resnet50, lwrefinenet_resnet101, lwrefinenet_resnet152)
+from ark.models.segmentation.pspnet import (
+    pspnet_resnet18, pspnet_resnet34, pspnet_resnet50, pspnet_resnet101)
 from ark.models.segmentation.segnet import segnet
 
 dependencies = ['torch']
