@@ -90,7 +90,7 @@ class LWRefineNet(nn.Module):
             x = self.rcus2[idx](x)
 
         x = self.classifier(x)
-        return x
+        return F.interpolate(x, input.shape[2:], mode='bilinear', align_corners=True)
 
 
 class ContextResidualPooling(nn.ModuleList):
