@@ -126,7 +126,7 @@ class FeatureExtractor(nn.Module):
         if self.include_output:
             return output, intermediates
         else:
-            intermediates
+            return intermediates
 
 
 class DeepSupervisor(nn.Module):
