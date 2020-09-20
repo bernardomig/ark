@@ -119,7 +119,7 @@ class FeatureExtractor(nn.Module):
             for layer in self._intermediate_layers:
                 stack.enter_context(layer)
 
-            output = super().__call__(input)
+            output = super().forward(input)
 
         intermediates = [layer.value for layer in self._intermediate_layers]
 
