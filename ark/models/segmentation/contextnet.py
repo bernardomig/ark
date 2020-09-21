@@ -24,8 +24,8 @@ def contextnet12(in_channels=3, out_channels=19):
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
                 'state_dict': 'contextnet14-cityscapes-15dc9302ca.pt'},
-    bdd100k={'in_channels': 3, 'out_channels': 19,
-             'state_dict': 'contextnet14-bdd100k-dec859f5bf.pt'},
+    bdd={'in_channels': 3, 'out_channels': 19,
+         'state_dict': 'contextnet14-bdd-dec859f5bf.pt'},
 )
 def contextnet14(in_channels, out_channels, width_multiplier=1):
     return ContextNet(in_channels, out_channels,
@@ -36,8 +36,8 @@ def contextnet14(in_channels, out_channels, width_multiplier=1):
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
                 'state_dict': 'contextnet18-cityscapes-40bf30973d.pt'},
-    bdd100k={'in_channels': 3, 'out_channels': 19,
-             'state_dict': 'contextnet18-bdd100k-6dac20b713.pt'},
+    bdd={'in_channels': 3, 'out_channels': 19,
+         'state_dict': 'contextnet18-bdd-6dac20b713.pt'},
 )
 def contextnet18(in_channels=3, out_channels=19):
     return ContextNet(in_channels, out_channels,
