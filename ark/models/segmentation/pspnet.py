@@ -8,8 +8,8 @@ from ark.utils.hub import register_model
 
 
 @register_model(
-    cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'pspnet_resnet18-cityscapes-74cdcf03c8.pt'},
+    cityscapes={'in_channels': 3, 'out_channels': 19, 'state_dict': 'pspnet_resnet18-cityscapes-74cdcf03c8.pt'},
+    voc={'in_channels': 3, 'out_channels': 21, 'state_dict': 'pspnet_resnet18-voc-36e19907f0.pt'},
 )
 def pspnet_resnet18(in_channels, out_channels):
     from ark.models.classification.resnet import resnet18
@@ -20,8 +20,8 @@ def pspnet_resnet18(in_channels, out_channels):
 
 
 @register_model(
-    cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'pspnet_resnet34-cityscapes-6b341e14a4.pt'},
+    cityscapes={'in_channels': 3, 'out_channels': 19, 'state_dict': 'pspnet_resnet34-cityscapes-6b341e14a4.pt'},
+    voc={'in_channels': 3, 'out_channels': 21, 'state_dict': 'pspnet_resnet34-voc-f11898f0ea.pt'},
 )
 def pspnet_resnet34(in_channels, out_channels):
     from ark.models.classification.resnet import resnet34
@@ -31,6 +31,9 @@ def pspnet_resnet34(in_channels, out_channels):
     return PSPNet(features, out_channels, feature_channels=512, ppm_channels=128)
 
 
+@register_model(
+    voc={'in_channels': 3, 'out_channels': 21, 'state_dict': 'pspnet_resnet50-voc-18bbc73a95.pt'},
+)
 def pspnet_resnet50(in_channels, out_channels):
     from ark.models.classification.resnet import resnet50
     model = resnet50(in_channels, 1)
@@ -39,6 +42,9 @@ def pspnet_resnet50(in_channels, out_channels):
     return PSPNet(features, out_channels, feature_channels=2048, ppm_channels=256)
 
 
+@register_model(
+    voc={'in_channels': 3, 'out_channels': 21, 'state_dict': 'pspnet_resnet101-voc-8307b89264.pt'},
+)
 def pspnet_resnet101(in_channels, out_channels):
     from ark.models.classification.resnet import resnet101
     model = resnet101(in_channels, 1)
