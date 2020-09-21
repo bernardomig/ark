@@ -15,6 +15,7 @@ __all__ = [
 @register_model(
     cityscapes={'in_channels': 3, 'out_channels': 19,
                 'state_dict': 'contextnet12-cityscapes-35f9d5cfc2.pt'},
+    bdd={'in_channels': 3, 'out_channels': 19, 'state_dict': 'contextnet12-bdd-8da99caf09.pt'},
 )
 def contextnet12(in_channels=3, out_channels=19):
     return ContextNet(in_channels, out_channels,
