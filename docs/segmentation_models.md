@@ -22,6 +22,9 @@
 | contextnet12 | Cityscapes |    1.024 | 1024x512  |  0.9388  | 0.6571 | [weight](contextnet12-cityscapes-1024x512-6676a2fabe.pt) |
 | contextnet14 | Cityscapes |    1.024 | 1024x512  |  0.9324  | 0.6172 | [weight](contextnet14-cityscapes-1024x512-957724c46f.pt) |
 | contextnet18 | Cityscapes |    1.024 | 1024x512  |  0.9249  | 0.5734 | [weight](contextnet18-cityscapes-1024x512-951e54bb54.pt) |
+| contextnet12 | BDD        |    1.024 | 1280x720  |  0.9184  | 0.519  | [weight](contextnet12-bdd-8da99caf09.pt)                 |
+| contextnet14 | BDD        |    1.024 | 1280x720  |  0.9166  | 0.5001 | [weight](contextnet14-bdd-dec859f5bf.pt)                 |
+| contextnet18 | BDD        |    1.024 | 1280x720  |  0.9008  | 0.4563 | [weight](contextnet18-bdd-6dac20b713.pt)                 |
 
 ## ENet
 
