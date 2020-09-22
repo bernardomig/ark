@@ -33,6 +33,7 @@ from ark.models.classification.shufflenetv2 import (
 from ark.models.classification.squeezenet import squeezenet
 from ark.models.classification.vgg import (
     vgg11, vgg13, vgg16, vgg19)
+from ark.models.classification.vovnet import (vovnet37, vovnet57)
 from ark.models.classification.wrn import wrn50_2_0, wrn101_2_0
 
 from ark.models.segmentation.bisenetv2 import bisenetv2
