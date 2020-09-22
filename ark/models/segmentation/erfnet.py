@@ -6,8 +6,8 @@ from ark.utils.hub import register_model
 
 
 @register_model(
-    cityscapes={'in_channels': 3, 'out_channels': 19,
-                'state_dict': 'erfnet-cityscapes-b3c041fa10.pt'},
+    cityscapes={'in_channels': 3, 'out_channels': 19, 'state_dict': 'erfnet-cityscapes-b3c041fa10.pt'},
+    bdd={'in_channels': 3, 'out_channels': 19, 'state_dict': 'erfnet-bdd-3b6a15be6c.pt'},
 )
 def erfnet(in_channels, out_channels):
     return ERFNet(in_channels, out_channels)

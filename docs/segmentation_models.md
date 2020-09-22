@@ -37,6 +37,7 @@
 | Name   | Dataset    | # Params | Eval Size | Accuracy |  mIoU  | Weight                                    |
 | ------ | ---------- | -------: | :-------: | :------: | :----: | ----------------------------------------- |
 | erfnet | Cityscapes |    2.064 | 2048x1024 |  0.9570  | 0.7581 | [weight](erfnet-cityscapes-b3c041fa10.pt) |
+| erfnet | BDD        |    2.064 | 1280x720  |  0.9292  | 0.5514 | [weight](erfnet-bdd-3b6a15be6c.pt)        |
 
 ## ESNet
 
