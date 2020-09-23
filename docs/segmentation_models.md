@@ -44,6 +44,7 @@
 | Name  | Dataset    | # Params | Eval Size | Accuracy |  mIoU  | Weight                                   |
 | ----- | ---------- | -------: | :-------: | :------: | :----: | ---------------------------------------- |
 | esnet | Cityscapes |    2.450 | 2048x1024 |  0.9595  | 0.7669 | [weight](esnet-cityscapes-a2fa1056cc.pt) |
+| esnet | BDD        |    2.450 | 1280x720  |  0.9320  | 0.5562 | [weight](esnet-bdd-abce67cb30.pt)        |
 
 ## ESPNet
 

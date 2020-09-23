@@ -8,9 +8,8 @@ from ark.utils.hub import register_model
 
 
 @register_model(
-    cityscapes={'in_channels': 3,
-                'out_channels': 19,
-                'state_dict': 'esnet-cityscapes-a2fa1056cc.pt'},
+    cityscapes={'in_channels': 3, 'out_channels': 19, 'state_dict': 'esnet-cityscapes-a2fa1056cc.pt'},
+    bdd={'in_channels': 3, 'out_channels': 19, 'state_dict': 'esnet-bdd-abce67cb30.pt'},
 )
 def esnet(in_channels, out_channels):
     return ESNet(in_channels, out_channels)
